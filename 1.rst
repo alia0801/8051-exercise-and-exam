@@ -1,0 +1,2159 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.5.0 #1020 (May  8 2005)
+                              4 ; This file generated Tue Nov 19 19:04:31 2019
+                              5 ;--------------------------------------------------------
+                              6 	.module 1
+                              7 	.optsdcc -mmcs51 --model-small
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _startmsg2
+                             13 	.globl _startmsg1
+                             14 	.globl _msg
+                             15 	.globl _keymsg
+                             16 	.globl _key
+                             17 	.globl _ser
+                             18 	.globl _init
+                             19 	.globl _addr2
+                             20 	.globl _addr1
+                             21 	.globl _interr_s
+                             22 	.globl _tmiintrt
+                             23 	.globl _main
+                             24 	.globl _CY
+                             25 	.globl _AC
+                             26 	.globl _F0
+                             27 	.globl _RS1
+                             28 	.globl _RS0
+                             29 	.globl _OV
+                             30 	.globl _F1
+                             31 	.globl _P
+                             32 	.globl _PS
+                             33 	.globl _PT1
+                             34 	.globl _PX1
+                             35 	.globl _PT0
+                             36 	.globl _PX0
+                             37 	.globl _RD
+                             38 	.globl _WR
+                             39 	.globl _T1
+                             40 	.globl _T0
+                             41 	.globl _INT1
+                             42 	.globl _INT0
+                             43 	.globl _TXD
+                             44 	.globl _RXD
+                             45 	.globl _P3_7
+                             46 	.globl _P3_6
+                             47 	.globl _P3_5
+                             48 	.globl _P3_4
+                             49 	.globl _P3_3
+                             50 	.globl _P3_2
+                             51 	.globl _P3_1
+                             52 	.globl _P3_0
+                             53 	.globl _EA
+                             54 	.globl _ES
+                             55 	.globl _ET1
+                             56 	.globl _EX1
+                             57 	.globl _ET0
+                             58 	.globl _EX0
+                             59 	.globl _P2_7
+                             60 	.globl _P2_6
+                             61 	.globl _P2_5
+                             62 	.globl _P2_4
+                             63 	.globl _P2_3
+                             64 	.globl _P2_2
+                             65 	.globl _P2_1
+                             66 	.globl _P2_0
+                             67 	.globl _SM0
+                             68 	.globl _SM1
+                             69 	.globl _SM2
+                             70 	.globl _REN
+                             71 	.globl _TB8
+                             72 	.globl _RB8
+                             73 	.globl _TI
+                             74 	.globl _RI
+                             75 	.globl _P1_7
+                             76 	.globl _P1_6
+                             77 	.globl _P1_5
+                             78 	.globl _P1_4
+                             79 	.globl _P1_3
+                             80 	.globl _P1_2
+                             81 	.globl _P1_1
+                             82 	.globl _P1_0
+                             83 	.globl _TF1
+                             84 	.globl _TR1
+                             85 	.globl _TF0
+                             86 	.globl _TR0
+                             87 	.globl _IE1
+                             88 	.globl _IT1
+                             89 	.globl _IE0
+                             90 	.globl _IT0
+                             91 	.globl _P0_7
+                             92 	.globl _P0_6
+                             93 	.globl _P0_5
+                             94 	.globl _P0_4
+                             95 	.globl _P0_3
+                             96 	.globl _P0_2
+                             97 	.globl _P0_1
+                             98 	.globl _P0_0
+                             99 	.globl _B
+                            100 	.globl _ACC
+                            101 	.globl _PSW
+                            102 	.globl _IP
+                            103 	.globl _P3
+                            104 	.globl _IE
+                            105 	.globl _P2
+                            106 	.globl _SBUF
+                            107 	.globl _SCON
+                            108 	.globl _P1
+                            109 	.globl _TH1
+                            110 	.globl _TH0
+                            111 	.globl _TL1
+                            112 	.globl _TL0
+                            113 	.globl _TMOD
+                            114 	.globl _TCON
+                            115 	.globl _PCON
+                            116 	.globl _DPH
+                            117 	.globl _DPL
+                            118 	.globl _SP
+                            119 	.globl _P0
+                            120 	.globl _count
+                            121 	.globl _c
+                            122 	.globl _get
+                            123 	.globl _state
+                            124 	.globl _a
+                            125 	.globl _dir_m
+                            126 	.globl _m
+                            127 	.globl _ch
+                            128 	.globl _rx_flag
+                            129 	.globl _counter
+                            130 	.globl _COUNTER
+                            131 	.globl _getkey
+                            132 	.globl _LCDcmd
+                            133 	.globl _LCDdata
+                            134 	.globl _delay
+                            135 ;--------------------------------------------------------
+                            136 ; special function registers
+                            137 ;--------------------------------------------------------
+                            138 	.area RSEG    (DATA)
+                    0080    139 _P0	=	0x0080
+                    0081    140 _SP	=	0x0081
+                    0082    141 _DPL	=	0x0082
+                    0083    142 _DPH	=	0x0083
+                    0087    143 _PCON	=	0x0087
+                    0088    144 _TCON	=	0x0088
+                    0089    145 _TMOD	=	0x0089
+                    008A    146 _TL0	=	0x008a
+                    008B    147 _TL1	=	0x008b
+                    008C    148 _TH0	=	0x008c
+                    008D    149 _TH1	=	0x008d
+                    0090    150 _P1	=	0x0090
+                    0098    151 _SCON	=	0x0098
+                    0099    152 _SBUF	=	0x0099
+                    00A0    153 _P2	=	0x00a0
+                    00A8    154 _IE	=	0x00a8
+                    00B0    155 _P3	=	0x00b0
+                    00B8    156 _IP	=	0x00b8
+                    00D0    157 _PSW	=	0x00d0
+                    00E0    158 _ACC	=	0x00e0
+                    00F0    159 _B	=	0x00f0
+                            160 ;--------------------------------------------------------
+                            161 ; special function bits 
+                            162 ;--------------------------------------------------------
+                            163 	.area RSEG    (DATA)
+                    0080    164 _P0_0	=	0x0080
+                    0081    165 _P0_1	=	0x0081
+                    0082    166 _P0_2	=	0x0082
+                    0083    167 _P0_3	=	0x0083
+                    0084    168 _P0_4	=	0x0084
+                    0085    169 _P0_5	=	0x0085
+                    0086    170 _P0_6	=	0x0086
+                    0087    171 _P0_7	=	0x0087
+                    0088    172 _IT0	=	0x0088
+                    0089    173 _IE0	=	0x0089
+                    008A    174 _IT1	=	0x008a
+                    008B    175 _IE1	=	0x008b
+                    008C    176 _TR0	=	0x008c
+                    008D    177 _TF0	=	0x008d
+                    008E    178 _TR1	=	0x008e
+                    008F    179 _TF1	=	0x008f
+                    0090    180 _P1_0	=	0x0090
+                    0091    181 _P1_1	=	0x0091
+                    0092    182 _P1_2	=	0x0092
+                    0093    183 _P1_3	=	0x0093
+                    0094    184 _P1_4	=	0x0094
+                    0095    185 _P1_5	=	0x0095
+                    0096    186 _P1_6	=	0x0096
+                    0097    187 _P1_7	=	0x0097
+                    0098    188 _RI	=	0x0098
+                    0099    189 _TI	=	0x0099
+                    009A    190 _RB8	=	0x009a
+                    009B    191 _TB8	=	0x009b
+                    009C    192 _REN	=	0x009c
+                    009D    193 _SM2	=	0x009d
+                    009E    194 _SM1	=	0x009e
+                    009F    195 _SM0	=	0x009f
+                    00A0    196 _P2_0	=	0x00a0
+                    00A1    197 _P2_1	=	0x00a1
+                    00A2    198 _P2_2	=	0x00a2
+                    00A3    199 _P2_3	=	0x00a3
+                    00A4    200 _P2_4	=	0x00a4
+                    00A5    201 _P2_5	=	0x00a5
+                    00A6    202 _P2_6	=	0x00a6
+                    00A7    203 _P2_7	=	0x00a7
+                    00A8    204 _EX0	=	0x00a8
+                    00A9    205 _ET0	=	0x00a9
+                    00AA    206 _EX1	=	0x00aa
+                    00AB    207 _ET1	=	0x00ab
+                    00AC    208 _ES	=	0x00ac
+                    00AF    209 _EA	=	0x00af
+                    00B0    210 _P3_0	=	0x00b0
+                    00B1    211 _P3_1	=	0x00b1
+                    00B2    212 _P3_2	=	0x00b2
+                    00B3    213 _P3_3	=	0x00b3
+                    00B4    214 _P3_4	=	0x00b4
+                    00B5    215 _P3_5	=	0x00b5
+                    00B6    216 _P3_6	=	0x00b6
+                    00B7    217 _P3_7	=	0x00b7
+                    00B0    218 _RXD	=	0x00b0
+                    00B1    219 _TXD	=	0x00b1
+                    00B2    220 _INT0	=	0x00b2
+                    00B3    221 _INT1	=	0x00b3
+                    00B4    222 _T0	=	0x00b4
+                    00B5    223 _T1	=	0x00b5
+                    00B6    224 _WR	=	0x00b6
+                    00B7    225 _RD	=	0x00b7
+                    00B8    226 _PX0	=	0x00b8
+                    00B9    227 _PT0	=	0x00b9
+                    00BA    228 _PX1	=	0x00ba
+                    00BB    229 _PT1	=	0x00bb
+                    00BC    230 _PS	=	0x00bc
+                    00D0    231 _P	=	0x00d0
+                    00D1    232 _F1	=	0x00d1
+                    00D2    233 _OV	=	0x00d2
+                    00D3    234 _RS0	=	0x00d3
+                    00D4    235 _RS1	=	0x00d4
+                    00D5    236 _F0	=	0x00d5
+                    00D6    237 _AC	=	0x00d6
+                    00D7    238 _CY	=	0x00d7
+                            239 ;--------------------------------------------------------
+                            240 ; overlayable register banks 
+                            241 ;--------------------------------------------------------
+                            242 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     243 	.ds 8
+                            244 ;--------------------------------------------------------
+                            245 ; internal ram data
+                            246 ;--------------------------------------------------------
+                            247 	.area DSEG    (DATA)
+   0008                     248 _COUNTER::
+   0008                     249 	.ds 2
+   000A                     250 _counter::
+   000A                     251 	.ds 1
+   000B                     252 _rx_flag::
+   000B                     253 	.ds 2
+   000D                     254 _ch::
+   000D                     255 	.ds 1
+   000E                     256 _m::
+   000E                     257 	.ds 2
+   0010                     258 _dir_m::
+   0010                     259 	.ds 2
+   0012                     260 _a::
+   0012                     261 	.ds 2
+   0014                     262 _state::
+   0014                     263 	.ds 2
+   0016                     264 _get::
+   0016                     265 	.ds 2
+   0018                     266 _c::
+   0018                     267 	.ds 2
+   001A                     268 _count::
+   001A                     269 	.ds 2
+                            270 ;--------------------------------------------------------
+                            271 ; overlayable items in internal ram 
+                            272 ;--------------------------------------------------------
+                            273 	.area	OSEG    (OVR,DATA)
+                            274 	.area	OSEG    (OVR,DATA)
+                            275 ;--------------------------------------------------------
+                            276 ; Stack segment in internal ram 
+                            277 ;--------------------------------------------------------
+                            278 	.area	SSEG	(DATA)
+   001C                     279 __start__stack:
+   001C                     280 	.ds	1
+                            281 
+                            282 ;--------------------------------------------------------
+                            283 ; indirectly addressable internal ram data
+                            284 ;--------------------------------------------------------
+                            285 	.area ISEG    (DATA)
+                            286 ;--------------------------------------------------------
+                            287 ; bit data
+                            288 ;--------------------------------------------------------
+                            289 	.area BSEG    (BIT)
+                            290 ;--------------------------------------------------------
+                            291 ; paged external ram data
+                            292 ;--------------------------------------------------------
+                            293 	.area PSEG    (PAG,XDATA)
+                            294 ;--------------------------------------------------------
+                            295 ; external ram data
+                            296 ;--------------------------------------------------------
+                            297 	.area XSEG    (XDATA)
+                            298 ;--------------------------------------------------------
+                            299 ; external initialized ram data
+                            300 ;--------------------------------------------------------
+                            301 	.area XISEG   (XDATA)
+                            302 	.area CSEG    (CODE)
+                            303 	.area GSINIT0 (CODE)
+                            304 	.area GSINIT1 (CODE)
+                            305 	.area GSINIT2 (CODE)
+                            306 	.area GSINIT3 (CODE)
+                            307 	.area GSINIT4 (CODE)
+                            308 	.area GSINIT5 (CODE)
+                            309 ;--------------------------------------------------------
+                            310 ; interrupt vector 
+                            311 ;--------------------------------------------------------
+                            312 	.area CSEG    (CODE)
+   0000                     313 __interrupt_vect:
+   0000 02 07 66            314 	ljmp	__sdcc_gsinit_startup
+   0003 32                  315 	reti
+   0004                     316 	.ds	7
+   000B 02 03 93            317 	ljmp	_tmiintrt
+   000E                     318 	.ds	5
+   0013 32                  319 	reti
+   0014                     320 	.ds	7
+   001B 32                  321 	reti
+   001C                     322 	.ds	7
+   0023 02 04 F4            323 	ljmp	_interr_s
+                            324 ;--------------------------------------------------------
+                            325 ; global & static initialisations
+                            326 ;--------------------------------------------------------
+                            327 	.area CSEG    (CODE)
+                            328 	.area GSINIT  (CODE)
+                            329 	.area GSFINAL (CODE)
+                            330 	.area GSINIT  (CODE)
+                            331 	.globl __sdcc_gsinit_startup
+                            332 	.globl __sdcc_program_startup
+                            333 	.globl __start__stack
+                            334 	.globl __mcs51_genXINIT
+                            335 	.globl __mcs51_genXRAMCLEAR
+                            336 	.globl __mcs51_genRAMCLEAR
+                            337 	.area GSFINAL (CODE)
+   07BF 02 00 26            338 	ljmp	__sdcc_program_startup
+                            339 ;--------------------------------------------------------
+                            340 ; Home
+                            341 ;--------------------------------------------------------
+                            342 	.area HOME    (CODE)
+                            343 	.area CSEG    (CODE)
+                            344 ;--------------------------------------------------------
+                            345 ; code
+                            346 ;--------------------------------------------------------
+                            347 	.area CSEG    (CODE)
+   0026                     348 __sdcc_program_startup:
+   0026 12 00 2B            349 	lcall	_main
+                            350 ;	return from main will lock up
+   0029 80 FE               351 	sjmp .
+                            352 ;------------------------------------------------------------
+                            353 ;Allocation info for local variables in function 'main'
+                            354 ;------------------------------------------------------------
+                            355 ;i                         Allocated to registers r2 r3 
+                            356 ;x                         Allocated to registers r2 r3 
+                            357 ;------------------------------------------------------------
+                            358 ;c:/sdcc/exam/1.c:49: void main()
+                            359 ;	-----------------------------------------
+                            360 ;	 function main
+                            361 ;	-----------------------------------------
+   002B                     362 _main:
+                    0002    363 	ar2 = 0x02
+                    0003    364 	ar3 = 0x03
+                    0004    365 	ar4 = 0x04
+                    0005    366 	ar5 = 0x05
+                    0006    367 	ar6 = 0x06
+                    0007    368 	ar7 = 0x07
+                    0000    369 	ar0 = 0x00
+                    0001    370 	ar1 = 0x01
+                            371 ;c:/sdcc/exam/1.c:52: state = 0;
+                            372 ;     genAssign
+                            373 ;c:/sdcc/exam/1.c:53: m = 0;
+                            374 ;     genAssign
+   002B E4                  375 	clr	a
+   002C F5 14               376 	mov	_state,a
+   002E F5 15               377 	mov	(_state + 1),a
+                            378 ;	Peephole 3.d	removed redundant clr
+   0030 F5 0E               379 	mov	_m,a
+   0032 F5 0F               380 	mov	(_m + 1),a
+                            381 ;c:/sdcc/exam/1.c:54: dir_m = 1;
+                            382 ;     genAssign
+   0034 75 10 01            383 	mov	_dir_m,#0x01
+   0037 E4                  384 	clr	a
+   0038 F5 11               385 	mov	(_dir_m + 1),a
+                            386 ;c:/sdcc/exam/1.c:55: COUNTER = COUNTER1;
+                            387 ;     genAssign
+   003A 75 08 0A            388 	mov	_COUNTER,#0x0A
+   003D E4                  389 	clr	a
+   003E F5 09               390 	mov	(_COUNTER + 1),a
+                            391 ;c:/sdcc/exam/1.c:56: get = 0;
+                            392 ;     genAssign
+                            393 ;c:/sdcc/exam/1.c:57: c = 0;
+                            394 ;     genAssign
+                            395 ;	Peephole 3.d	removed redundant clr
+                            396 ;c:/sdcc/exam/1.c:58: count = 0;
+                            397 ;     genAssign
+   0040 E4                  398 	clr	a
+   0041 F5 16               399 	mov	_get,a
+   0043 F5 17               400 	mov	(_get + 1),a
+   0045 F5 18               401 	mov	_c,a
+   0047 F5 19               402 	mov	(_c + 1),a
+                            403 ;	Peephole 3.f	removed redundant clr
+   0049 F5 1A               404 	mov	_count,a
+   004B F5 1B               405 	mov	(_count + 1),a
+                            406 ;c:/sdcc/exam/1.c:60: P3_2 = 0;   // RS初始化為0 
+                            407 ;     genAssign
+   004D C2 B2               408 	clr	_P3_2
+                            409 ;c:/sdcc/exam/1.c:61: P3_3 = 0;   // R_W初始化為0 
+                            410 ;     genAssign
+   004F C2 B3               411 	clr	_P3_3
+                            412 ;c:/sdcc/exam/1.c:62: P3_4 = 0;   // ENABLE初始化為0，LCD致能失效 
+                            413 ;     genAssign
+   0051 C2 B4               414 	clr	_P3_4
+                            415 ;c:/sdcc/exam/1.c:64: SCON=0x50;  //SCON暫存器01010000 
+                            416 ;     genAssign
+   0053 75 98 50            417 	mov	_SCON,#0x50
+                            418 ;c:/sdcc/exam/1.c:66: TH1=0xf3;   //講義上有說，用來計算baud
+                            419 ;     genAssign
+   0056 75 8D F3            420 	mov	_TH1,#0xF3
+                            421 ;c:/sdcc/exam/1.c:67: TR1=1;      //timer1啟動  
+                            422 ;     genAssign
+   0059 D2 8E               423 	setb	_TR1
+                            424 ;c:/sdcc/exam/1.c:69: rx_flag=0;  // (?) 
+                            425 ;     genAssign
+                            426 ;c:/sdcc/exam/1.c:71: TCON=0x00;   //00000000 初始化TCON暫存器 
+                            427 ;     genAssign
+   005B E4                  428 	clr	a
+   005C F5 0B               429 	mov	_rx_flag,a
+   005E F5 0C               430 	mov	(_rx_flag + 1),a
+                            431 ;	Peephole 3.h	changed mov _TCON,#0x00 to _TCON,a
+   0060 F5 88               432 	mov	_TCON,a
+                            433 ;c:/sdcc/exam/1.c:72: TMOD=0x21;   //00100001 設定timer1為mode2 設定Timer0為16位元計數器 
+                            434 ;     genAssign
+   0062 75 89 21            435 	mov	_TMOD,#0x21
+                            436 ;c:/sdcc/exam/1.c:74: IE=0x82;     //10000010 中斷致能，啟用了Timer0 overflow的中斷
+                            437 ;     genAssign
+   0065 75 A8 82            438 	mov	_IE,#0x82
+                            439 ;c:/sdcc/exam/1.c:76: TL0 = _TL0_; //設定差50000個machine cycle才觸發中斷 
+                            440 ;     genAssign
+   0068 75 8A E0            441 	mov	_TL0,#0xE0
+                            442 ;c:/sdcc/exam/1.c:77: TH0 = _TH0_; 
+                            443 ;     genAssign
+   006B 75 8C 3C            444 	mov	_TH0,#0x3C
+                            445 ;c:/sdcc/exam/1.c:78: TR0 = 1;     //TCON內的TR0設定為1，啟動Timer0 
+                            446 ;     genAssign
+   006E D2 8C               447 	setb	_TR0
+                            448 ;c:/sdcc/exam/1.c:79: counter = 0;
+                            449 ;     genAssign
+   0070 75 0A 00            450 	mov	_counter,#0x00
+                            451 ;c:/sdcc/exam/1.c:81: for(i = 0; i < 5; i++)
+                            452 ;     genAssign
+   0073 7A 00               453 	mov	r2,#0x00
+   0075 7B 00               454 	mov	r3,#0x00
+   0077                     455 00144$:
+                            456 ;     genCmpLt
+                            457 ;     genCmp
+   0077 C3                  458 	clr	c
+   0078 EA                  459 	mov	a,r2
+   0079 94 05               460 	subb	a,#0x05
+   007B EB                  461 	mov	a,r3
+   007C 64 80               462 	xrl	a,#0x80
+   007E 94 80               463 	subb	a,#0x80
+                            464 ;     genIfxJump
+                            465 ;	Peephole 108	removed ljmp by inverse jump logic
+   0080 50 21               466 	jnc	00161$
+   0082                     467 00181$:
+                            468 ;c:/sdcc/exam/1.c:88: LCDcmd(init[i]); 
+                            469 ;     genPlus
+                            470 ;	Peephole 236.g	used r2 instead of ar2
+   0082 EA                  471 	mov	a,r2
+   0083 24 FF               472 	add	a,#_init
+   0085 F5 82               473 	mov	dpl,a
+                            474 ;	Peephole 236.g	used r3 instead of ar3
+   0087 EB                  475 	mov	a,r3
+   0088 34 06               476 	addc	a,#(_init >> 8)
+   008A F5 83               477 	mov	dph,a
+                            478 ;     genPointerGet
+                            479 ;     genCodePointerGet
+                            480 ;	Peephole 181	changed mov to clr
+   008C E4                  481 	clr	a
+   008D 93                  482 	movc	a,@a+dptr
+                            483 ;     genCall
+                            484 ;	Peephole 244.c	loading dpl from a instead of r4
+   008E FC                  485 	mov	r4,a
+   008F F5 82               486 	mov	dpl,a
+   0091 C0 02               487 	push	ar2
+   0093 C0 03               488 	push	ar3
+   0095 12 06 96            489 	lcall	_LCDcmd
+   0098 D0 03               490 	pop	ar3
+   009A D0 02               491 	pop	ar2
+                            492 ;c:/sdcc/exam/1.c:81: for(i = 0; i < 5; i++)
+                            493 ;     genPlus
+                            494 ;     genPlusIncr
+                            495 ;	tail increment optimized
+   009C 0A                  496 	inc	r2
+   009D BA 00 D7            497 	cjne	r2,#0x00,00144$
+   00A0 0B                  498 	inc	r3
+                            499 ;c:/sdcc/exam/1.c:91: for(i = 0; i < 7; i++){   
+                            500 ;	Peephole 112.b	changed ljmp to sjmp
+   00A1 80 D4               501 	sjmp	00144$
+   00A3                     502 00161$:
+                            503 ;     genAssign
+   00A3 7A 00               504 	mov	r2,#0x00
+   00A5 7B 00               505 	mov	r3,#0x00
+   00A7                     506 00148$:
+                            507 ;     genCmpLt
+                            508 ;     genCmp
+   00A7 C3                  509 	clr	c
+   00A8 EA                  510 	mov	a,r2
+   00A9 94 07               511 	subb	a,#0x07
+   00AB EB                  512 	mov	a,r3
+   00AC 64 80               513 	xrl	a,#0x80
+   00AE 94 80               514 	subb	a,#0x80
+                            515 ;     genIfxJump
+                            516 ;	Peephole 108	removed ljmp by inverse jump logic
+   00B0 50 3B               517 	jnc	00163$
+   00B2                     518 00182$:
+                            519 ;c:/sdcc/exam/1.c:92: LCDcmd( addr1[i] );//設定位子 
+                            520 ;     genPlus
+                            521 ;	Peephole 236.g	used r2 instead of ar2
+   00B2 EA                  522 	mov	a,r2
+   00B3 24 DF               523 	add	a,#_addr1
+   00B5 F5 82               524 	mov	dpl,a
+                            525 ;	Peephole 236.g	used r3 instead of ar3
+   00B7 EB                  526 	mov	a,r3
+   00B8 34 06               527 	addc	a,#(_addr1 >> 8)
+   00BA F5 83               528 	mov	dph,a
+                            529 ;     genPointerGet
+                            530 ;     genCodePointerGet
+                            531 ;	Peephole 181	changed mov to clr
+   00BC E4                  532 	clr	a
+   00BD 93                  533 	movc	a,@a+dptr
+                            534 ;     genCall
+                            535 ;	Peephole 244.c	loading dpl from a instead of r4
+   00BE FC                  536 	mov	r4,a
+   00BF F5 82               537 	mov	dpl,a
+   00C1 C0 02               538 	push	ar2
+   00C3 C0 03               539 	push	ar3
+   00C5 12 06 96            540 	lcall	_LCDcmd
+   00C8 D0 03               541 	pop	ar3
+   00CA D0 02               542 	pop	ar2
+                            543 ;c:/sdcc/exam/1.c:93: LCDdata( startmsg1[i] );
+                            544 ;     genPlus
+                            545 ;	Peephole 236.g	used r2 instead of ar2
+   00CC EA                  546 	mov	a,r2
+   00CD 24 49               547 	add	a,#_startmsg1
+   00CF F5 82               548 	mov	dpl,a
+                            549 ;	Peephole 236.g	used r3 instead of ar3
+   00D1 EB                  550 	mov	a,r3
+   00D2 34 07               551 	addc	a,#(_startmsg1 >> 8)
+   00D4 F5 83               552 	mov	dph,a
+                            553 ;     genPointerGet
+                            554 ;     genCodePointerGet
+                            555 ;	Peephole 181	changed mov to clr
+   00D6 E4                  556 	clr	a
+   00D7 93                  557 	movc	a,@a+dptr
+                            558 ;     genCall
+                            559 ;	Peephole 244.c	loading dpl from a instead of r4
+   00D8 FC                  560 	mov	r4,a
+   00D9 F5 82               561 	mov	dpl,a
+   00DB C0 02               562 	push	ar2
+   00DD C0 03               563 	push	ar3
+   00DF 12 06 A9            564 	lcall	_LCDdata
+   00E2 D0 03               565 	pop	ar3
+   00E4 D0 02               566 	pop	ar2
+                            567 ;c:/sdcc/exam/1.c:91: for(i = 0; i < 7; i++){   
+                            568 ;     genPlus
+                            569 ;     genPlusIncr
+   00E6 0A                  570 	inc	r2
+                            571 ;c:/sdcc/exam/1.c:95: for(i = 0; i < 16; i++){   
+                            572 ;	Peephole 112.b	changed ljmp to sjmp
+                            573 ;	Peephole 243	avoided branch to sjmp
+   00E7 BA 00 BD            574 	cjne	r2,#0x00,00148$
+   00EA 0B                  575 	inc	r3
+   00EB                     576 00183$:
+   00EB 80 BA               577 	sjmp	00148$
+   00ED                     578 00163$:
+                            579 ;     genAssign
+   00ED 7A 00               580 	mov	r2,#0x00
+   00EF 7B 00               581 	mov	r3,#0x00
+   00F1                     582 00152$:
+                            583 ;     genCmpLt
+                            584 ;     genCmp
+   00F1 C3                  585 	clr	c
+   00F2 EA                  586 	mov	a,r2
+   00F3 94 10               587 	subb	a,#0x10
+   00F5 EB                  588 	mov	a,r3
+   00F6 64 80               589 	xrl	a,#0x80
+   00F8 94 80               590 	subb	a,#0x80
+                            591 ;     genIfxJump
+                            592 ;	Peephole 108	removed ljmp by inverse jump logic
+   00FA 50 3B               593 	jnc	00142$
+   00FC                     594 00184$:
+                            595 ;c:/sdcc/exam/1.c:96: LCDcmd( addr2[i] );//設定位子 
+                            596 ;     genPlus
+                            597 ;	Peephole 236.g	used r2 instead of ar2
+   00FC EA                  598 	mov	a,r2
+   00FD 24 EF               599 	add	a,#_addr2
+   00FF F5 82               600 	mov	dpl,a
+                            601 ;	Peephole 236.g	used r3 instead of ar3
+   0101 EB                  602 	mov	a,r3
+   0102 34 06               603 	addc	a,#(_addr2 >> 8)
+   0104 F5 83               604 	mov	dph,a
+                            605 ;     genPointerGet
+                            606 ;     genCodePointerGet
+                            607 ;	Peephole 181	changed mov to clr
+   0106 E4                  608 	clr	a
+   0107 93                  609 	movc	a,@a+dptr
+                            610 ;     genCall
+                            611 ;	Peephole 244.c	loading dpl from a instead of r4
+   0108 FC                  612 	mov	r4,a
+   0109 F5 82               613 	mov	dpl,a
+   010B C0 02               614 	push	ar2
+   010D C0 03               615 	push	ar3
+   010F 12 06 96            616 	lcall	_LCDcmd
+   0112 D0 03               617 	pop	ar3
+   0114 D0 02               618 	pop	ar2
+                            619 ;c:/sdcc/exam/1.c:97: LCDdata( startmsg2[i] );
+                            620 ;     genPlus
+                            621 ;	Peephole 236.g	used r2 instead of ar2
+   0116 EA                  622 	mov	a,r2
+   0117 24 51               623 	add	a,#_startmsg2
+   0119 F5 82               624 	mov	dpl,a
+                            625 ;	Peephole 236.g	used r3 instead of ar3
+   011B EB                  626 	mov	a,r3
+   011C 34 07               627 	addc	a,#(_startmsg2 >> 8)
+   011E F5 83               628 	mov	dph,a
+                            629 ;     genPointerGet
+                            630 ;     genCodePointerGet
+                            631 ;	Peephole 181	changed mov to clr
+   0120 E4                  632 	clr	a
+   0121 93                  633 	movc	a,@a+dptr
+                            634 ;     genCall
+                            635 ;	Peephole 244.c	loading dpl from a instead of r4
+   0122 FC                  636 	mov	r4,a
+   0123 F5 82               637 	mov	dpl,a
+   0125 C0 02               638 	push	ar2
+   0127 C0 03               639 	push	ar3
+   0129 12 06 A9            640 	lcall	_LCDdata
+   012C D0 03               641 	pop	ar3
+   012E D0 02               642 	pop	ar2
+                            643 ;c:/sdcc/exam/1.c:95: for(i = 0; i < 16; i++){   
+                            644 ;     genPlus
+                            645 ;     genPlusIncr
+   0130 0A                  646 	inc	r2
+                            647 ;c:/sdcc/exam/1.c:100: while(1)
+                            648 ;	Peephole 112.b	changed ljmp to sjmp
+                            649 ;	Peephole 243	avoided branch to sjmp
+   0131 BA 00 BD            650 	cjne	r2,#0x00,00152$
+   0134 0B                  651 	inc	r3
+   0135                     652 00185$:
+   0135 80 BA               653 	sjmp	00152$
+   0137                     654 00142$:
+                            655 ;c:/sdcc/exam/1.c:102: x=getkey(); 
+                            656 ;     genCall
+   0137 12 05 4A            657 	lcall	_getkey
+   013A AA 82               658 	mov	r2,dpl
+   013C AB 83               659 	mov	r3,dph
+                            660 ;c:/sdcc/exam/1.c:103: LCDcmd(0x80);     //設定DDRAM位置00H (螢幕左上角) 
+                            661 ;     genCall
+   013E 75 82 80            662 	mov	dpl,#0x80
+   0141 C0 02               663 	push	ar2
+   0143 C0 03               664 	push	ar3
+   0145 12 06 96            665 	lcall	_LCDcmd
+   0148 D0 03               666 	pop	ar3
+   014A D0 02               667 	pop	ar2
+                            668 ;c:/sdcc/exam/1.c:121: if(state == 0){//遊戲尚未開始 
+                            669 ;     genCmpEq
+   014C E5 14               670 	mov	a,_state
+   014E 70 04               671 	jnz	00186$
+   0150 E5 15               672 	mov	a,(_state + 1)
+                            673 ;	Peephole 162	removed sjmp by inverse jump logic
+   0152 60 02               674 	jz	00187$
+   0154                     675 00186$:
+                            676 ;	Peephole 112.b	changed ljmp to sjmp
+   0154 80 33               677 	sjmp	00139$
+   0156                     678 00187$:
+                            679 ;c:/sdcc/exam/1.c:122: if(x == 0 ){
+                            680 ;     genCmpEq
+                            681 ;	Peephole 112.b	changed ljmp to sjmp
+                            682 ;	Peephole 198	optimized misc jump sequence
+   0156 BA 00 DE            683 	cjne	r2,#0x00,00142$
+   0159 BB 00 DB            684 	cjne	r3,#0x00,00142$
+                            685 ;00188$:
+                            686 ;	Peephole 200	removed redundant sjmp
+   015C                     687 00189$:
+                            688 ;c:/sdcc/exam/1.c:123: state = 1;
+                            689 ;     genAssign
+   015C 75 14 01            690 	mov	_state,#0x01
+   015F E4                  691 	clr	a
+   0160 F5 15               692 	mov	(_state + 1),a
+                            693 ;c:/sdcc/exam/1.c:124: a=0; 
+                            694 ;     genAssign
+   0162 E4                  695 	clr	a
+   0163 F5 12               696 	mov	_a,a
+   0165 F5 13               697 	mov	(_a + 1),a
+                            698 ;c:/sdcc/exam/1.c:125: LCDcmd( 0x01 );
+                            699 ;     genCall
+   0167 75 82 01            700 	mov	dpl,#0x01
+   016A 12 06 96            701 	lcall	_LCDcmd
+                            702 ;c:/sdcc/exam/1.c:126: LCDcmd( addr1[a] );
+                            703 ;     genPlus
+   016D E5 12               704 	mov	a,_a
+   016F 24 DF               705 	add	a,#_addr1
+   0171 F5 82               706 	mov	dpl,a
+   0173 E5 13               707 	mov	a,(_a + 1)
+   0175 34 06               708 	addc	a,#(_addr1 >> 8)
+   0177 F5 83               709 	mov	dph,a
+                            710 ;     genPointerGet
+                            711 ;     genCodePointerGet
+                            712 ;	Peephole 181	changed mov to clr
+   0179 E4                  713 	clr	a
+   017A 93                  714 	movc	a,@a+dptr
+                            715 ;     genCall
+                            716 ;	Peephole 244.c	loading dpl from a instead of r4
+   017B FC                  717 	mov	r4,a
+   017C F5 82               718 	mov	dpl,a
+   017E 12 06 96            719 	lcall	_LCDcmd
+                            720 ;c:/sdcc/exam/1.c:127: LCDdata( 'v' );
+                            721 ;     genCall
+   0181 75 82 76            722 	mov	dpl,#0x76
+   0184 12 06 A9            723 	lcall	_LCDdata
+                            724 ;	Peephole 112.b	changed ljmp to sjmp
+   0187 80 AE               725 	sjmp	00142$
+   0189                     726 00139$:
+                            727 ;c:/sdcc/exam/1.c:130: else if(state == 1){//遊戲階段 
+                            728 ;     genCmpEq
+   0189 E5 14               729 	mov	a,_state
+   018B B4 01 04            730 	cjne	a,#0x01,00190$
+   018E E5 15               731 	mov	a,(_state + 1)
+                            732 ;	Peephole 162	removed sjmp by inverse jump logic
+   0190 60 03               733 	jz	00191$
+   0192                     734 00190$:
+   0192 02 03 4E            735 	ljmp	00136$
+   0195                     736 00191$:
+                            737 ;c:/sdcc/exam/1.c:131: if(x == 7){
+                            738 ;     genCmpEq
+                            739 ;	Peephole 112.b	changed ljmp to sjmp
+                            740 ;	Peephole 198	optimized misc jump sequence
+   0195 BA 07 51            741 	cjne	r2,#0x07,00123$
+   0198 BB 00 4E            742 	cjne	r3,#0x00,00123$
+                            743 ;00192$:
+                            744 ;	Peephole 200	removed redundant sjmp
+   019B                     745 00193$:
+                            746 ;c:/sdcc/exam/1.c:132: if(a != 0){
+                            747 ;     genCmpEq
+   019B E5 12               748 	mov	a,_a
+   019D 70 04               749 	jnz	00194$
+   019F E5 13               750 	mov	a,(_a + 1)
+                            751 ;	Peephole 110	removed ljmp by inverse jump logic
+   01A1 60 94               752 	jz	00142$
+   01A3                     753 00194$:
+                            754 ;c:/sdcc/exam/1.c:133: LCDcmd( 0x01 );
+                            755 ;     genCall
+   01A3 75 82 01            756 	mov	dpl,#0x01
+   01A6 12 06 96            757 	lcall	_LCDcmd
+                            758 ;c:/sdcc/exam/1.c:134: a--;
+                            759 ;     genMinus
+                            760 ;     genMinusDec
+   01A9 15 12               761 	dec	_a
+   01AB 74 FF               762 	mov	a,#0xff
+   01AD B5 12 02            763 	cjne	a,_a,00195$
+   01B0 15 13               764 	dec	(_a + 1)
+   01B2                     765 00195$:
+                            766 ;c:/sdcc/exam/1.c:135: LCDcmd( addr1[a] );
+                            767 ;     genPlus
+   01B2 E5 12               768 	mov	a,_a
+   01B4 24 DF               769 	add	a,#_addr1
+   01B6 F5 82               770 	mov	dpl,a
+   01B8 E5 13               771 	mov	a,(_a + 1)
+   01BA 34 06               772 	addc	a,#(_addr1 >> 8)
+   01BC F5 83               773 	mov	dph,a
+                            774 ;     genPointerGet
+                            775 ;     genCodePointerGet
+                            776 ;	Peephole 181	changed mov to clr
+   01BE E4                  777 	clr	a
+   01BF 93                  778 	movc	a,@a+dptr
+                            779 ;     genCall
+                            780 ;	Peephole 244.c	loading dpl from a instead of r4
+   01C0 FC                  781 	mov	r4,a
+   01C1 F5 82               782 	mov	dpl,a
+   01C3 12 06 96            783 	lcall	_LCDcmd
+                            784 ;c:/sdcc/exam/1.c:136: LCDdata( 'v' );
+                            785 ;     genCall
+   01C6 75 82 76            786 	mov	dpl,#0x76
+   01C9 12 06 A9            787 	lcall	_LCDdata
+                            788 ;c:/sdcc/exam/1.c:137: LCDcmd( addr2[m] );
+                            789 ;     genPlus
+   01CC E5 0E               790 	mov	a,_m
+   01CE 24 EF               791 	add	a,#_addr2
+   01D0 F5 82               792 	mov	dpl,a
+   01D2 E5 0F               793 	mov	a,(_m + 1)
+   01D4 34 06               794 	addc	a,#(_addr2 >> 8)
+   01D6 F5 83               795 	mov	dph,a
+                            796 ;     genPointerGet
+                            797 ;     genCodePointerGet
+                            798 ;	Peephole 181	changed mov to clr
+   01D8 E4                  799 	clr	a
+   01D9 93                  800 	movc	a,@a+dptr
+                            801 ;     genCall
+                            802 ;	Peephole 244.c	loading dpl from a instead of r4
+   01DA FC                  803 	mov	r4,a
+   01DB F5 82               804 	mov	dpl,a
+   01DD 12 06 96            805 	lcall	_LCDcmd
+                            806 ;c:/sdcc/exam/1.c:138: LCDdata( '*' );
+                            807 ;     genCall
+   01E0 75 82 2A            808 	mov	dpl,#0x2A
+   01E3 12 06 A9            809 	lcall	_LCDdata
+   01E6 02 01 37            810 	ljmp	00142$
+   01E9                     811 00123$:
+                            812 ;c:/sdcc/exam/1.c:141: else if(x == 9){
+                            813 ;     genCmpEq
+                            814 ;	Peephole 112.b	changed ljmp to sjmp
+                            815 ;	Peephole 198	optimized misc jump sequence
+   01E9 BA 09 54            816 	cjne	r2,#0x09,00120$
+   01EC BB 00 51            817 	cjne	r3,#0x00,00120$
+                            818 ;00196$:
+                            819 ;	Peephole 200	removed redundant sjmp
+   01EF                     820 00197$:
+                            821 ;c:/sdcc/exam/1.c:142: if(a != 15){
+                            822 ;     genCmpEq
+   01EF E5 12               823 	mov	a,_a
+   01F1 B4 0F 07            824 	cjne	a,#0x0F,00198$
+   01F4 E5 13               825 	mov	a,(_a + 1)
+   01F6 70 03               826 	jnz	00198$
+   01F8 02 01 37            827 	ljmp	00142$
+   01FB                     828 00198$:
+                            829 ;c:/sdcc/exam/1.c:143: LCDcmd( 0x01 );
+                            830 ;     genCall
+   01FB 75 82 01            831 	mov	dpl,#0x01
+   01FE 12 06 96            832 	lcall	_LCDcmd
+                            833 ;c:/sdcc/exam/1.c:144: a++;
+                            834 ;     genPlus
+                            835 ;     genPlusIncr
+   0201 05 12               836 	inc	_a
+   0203 E4                  837 	clr	a
+   0204 B5 12 02            838 	cjne	a,_a,00199$
+   0207 05 13               839 	inc	(_a + 1)
+   0209                     840 00199$:
+                            841 ;c:/sdcc/exam/1.c:145: LCDcmd( addr1[a] );
+                            842 ;     genPlus
+   0209 E5 12               843 	mov	a,_a
+   020B 24 DF               844 	add	a,#_addr1
+   020D F5 82               845 	mov	dpl,a
+   020F E5 13               846 	mov	a,(_a + 1)
+   0211 34 06               847 	addc	a,#(_addr1 >> 8)
+   0213 F5 83               848 	mov	dph,a
+                            849 ;     genPointerGet
+                            850 ;     genCodePointerGet
+                            851 ;	Peephole 181	changed mov to clr
+   0215 E4                  852 	clr	a
+   0216 93                  853 	movc	a,@a+dptr
+                            854 ;     genCall
+                            855 ;	Peephole 244.c	loading dpl from a instead of r4
+   0217 FC                  856 	mov	r4,a
+   0218 F5 82               857 	mov	dpl,a
+   021A 12 06 96            858 	lcall	_LCDcmd
+                            859 ;c:/sdcc/exam/1.c:146: LCDdata( 'v' );
+                            860 ;     genCall
+   021D 75 82 76            861 	mov	dpl,#0x76
+   0220 12 06 A9            862 	lcall	_LCDdata
+                            863 ;c:/sdcc/exam/1.c:147: LCDcmd( addr2[m] );
+                            864 ;     genPlus
+   0223 E5 0E               865 	mov	a,_m
+   0225 24 EF               866 	add	a,#_addr2
+   0227 F5 82               867 	mov	dpl,a
+   0229 E5 0F               868 	mov	a,(_m + 1)
+   022B 34 06               869 	addc	a,#(_addr2 >> 8)
+   022D F5 83               870 	mov	dph,a
+                            871 ;     genPointerGet
+                            872 ;     genCodePointerGet
+                            873 ;	Peephole 181	changed mov to clr
+   022F E4                  874 	clr	a
+   0230 93                  875 	movc	a,@a+dptr
+                            876 ;     genCall
+                            877 ;	Peephole 244.c	loading dpl from a instead of r4
+   0231 FC                  878 	mov	r4,a
+   0232 F5 82               879 	mov	dpl,a
+   0234 12 06 96            880 	lcall	_LCDcmd
+                            881 ;c:/sdcc/exam/1.c:148: LCDdata( '*' );
+                            882 ;     genCall
+   0237 75 82 2A            883 	mov	dpl,#0x2A
+   023A 12 06 A9            884 	lcall	_LCDdata
+   023D 02 01 37            885 	ljmp	00142$
+   0240                     886 00120$:
+                            887 ;c:/sdcc/exam/1.c:151: else if(x == 10){//A
+                            888 ;     genCmpEq
+                            889 ;	Peephole 112.b	changed ljmp to sjmp
+                            890 ;	Peephole 198	optimized misc jump sequence
+   0240 BA 0A 0C            891 	cjne	r2,#0x0A,00117$
+   0243 BB 00 09            892 	cjne	r3,#0x00,00117$
+                            893 ;00200$:
+                            894 ;	Peephole 200	removed redundant sjmp
+   0246                     895 00201$:
+                            896 ;c:/sdcc/exam/1.c:152: state = 2;//選擇速度 
+                            897 ;     genAssign
+   0246 75 14 02            898 	mov	_state,#0x02
+   0249 E4                  899 	clr	a
+   024A F5 15               900 	mov	(_state + 1),a
+   024C 02 01 37            901 	ljmp	00142$
+   024F                     902 00117$:
+                            903 ;c:/sdcc/exam/1.c:156: else if( x==8 && a==m){//打地鼠 
+                            904 ;     genCmpEq
+                            905 ;	Peephole 112.b	changed ljmp to sjmp
+                            906 ;	Peephole 198	optimized misc jump sequence
+   024F BA 08 52            907 	cjne	r2,#0x08,00113$
+   0252 BB 00 4F            908 	cjne	r3,#0x00,00113$
+                            909 ;00202$:
+                            910 ;	Peephole 200	removed redundant sjmp
+   0255                     911 00203$:
+                            912 ;     genCmpEq
+   0255 E5 12               913 	mov	a,_a
+                            914 ;	Peephole 112.b	changed ljmp to sjmp
+                            915 ;	Peephole 197.b	optimized misc jump sequence
+   0257 B5 0E 4A            916 	cjne	a,_m,00113$
+   025A E5 13               917 	mov	a,(_a + 1)
+   025C B5 0F 45            918 	cjne	a,(_m + 1),00113$
+                            919 ;00204$:
+                            920 ;	Peephole 200	removed redundant sjmp
+   025F                     921 00205$:
+                            922 ;c:/sdcc/exam/1.c:157: get = 1;
+                            923 ;     genAssign
+   025F 75 16 01            924 	mov	_get,#0x01
+   0262 E4                  925 	clr	a
+   0263 F5 17               926 	mov	(_get + 1),a
+                            927 ;c:/sdcc/exam/1.c:158: count++;
+                            928 ;     genPlus
+                            929 ;     genPlusIncr
+   0265 05 1A               930 	inc	_count
+   0267 E4                  931 	clr	a
+   0268 B5 1A 02            932 	cjne	a,_count,00206$
+   026B 05 1B               933 	inc	(_count + 1)
+   026D                     934 00206$:
+                            935 ;c:/sdcc/exam/1.c:159: LCDcmd( addr1[a] );
+                            936 ;     genPlus
+   026D E5 12               937 	mov	a,_a
+   026F 24 DF               938 	add	a,#_addr1
+   0271 F5 82               939 	mov	dpl,a
+   0273 E5 13               940 	mov	a,(_a + 1)
+   0275 34 06               941 	addc	a,#(_addr1 >> 8)
+   0277 F5 83               942 	mov	dph,a
+                            943 ;     genPointerGet
+                            944 ;     genCodePointerGet
+                            945 ;	Peephole 181	changed mov to clr
+   0279 E4                  946 	clr	a
+   027A 93                  947 	movc	a,@a+dptr
+                            948 ;     genCall
+                            949 ;	Peephole 244.c	loading dpl from a instead of r4
+   027B FC                  950 	mov	r4,a
+   027C F5 82               951 	mov	dpl,a
+   027E 12 06 96            952 	lcall	_LCDcmd
+                            953 ;c:/sdcc/exam/1.c:160: LCDdata( 'v' );
+                            954 ;     genCall
+   0281 75 82 76            955 	mov	dpl,#0x76
+   0284 12 06 A9            956 	lcall	_LCDdata
+                            957 ;c:/sdcc/exam/1.c:161: LCDcmd( addr2[m] );
+                            958 ;     genPlus
+   0287 E5 0E               959 	mov	a,_m
+   0289 24 EF               960 	add	a,#_addr2
+   028B F5 82               961 	mov	dpl,a
+   028D E5 0F               962 	mov	a,(_m + 1)
+   028F 34 06               963 	addc	a,#(_addr2 >> 8)
+   0291 F5 83               964 	mov	dph,a
+                            965 ;     genPointerGet
+                            966 ;     genCodePointerGet
+                            967 ;	Peephole 181	changed mov to clr
+   0293 E4                  968 	clr	a
+   0294 93                  969 	movc	a,@a+dptr
+                            970 ;     genCall
+                            971 ;	Peephole 244.c	loading dpl from a instead of r4
+   0295 FC                  972 	mov	r4,a
+   0296 F5 82               973 	mov	dpl,a
+   0298 12 06 96            974 	lcall	_LCDcmd
+                            975 ;c:/sdcc/exam/1.c:162: LCDdata( '-' );
+                            976 ;     genCall
+   029B 75 82 2D            977 	mov	dpl,#0x2D
+   029E 12 06 A9            978 	lcall	_LCDdata
+   02A1 02 01 37            979 	ljmp	00142$
+   02A4                     980 00113$:
+                            981 ;c:/sdcc/exam/1.c:165: else if(x == 11){//B看分數 
+                            982 ;     genCmpEq
+                            983 ;	Peephole 112.b	changed ljmp to sjmp
+                            984 ;	Peephole 198	optimized misc jump sequence
+   02A4 BA 0B 59            985 	cjne	r2,#0x0B,00110$
+   02A7 BB 00 56            986 	cjne	r3,#0x00,00110$
+                            987 ;00207$:
+                            988 ;	Peephole 200	removed redundant sjmp
+   02AA                     989 00208$:
+                            990 ;c:/sdcc/exam/1.c:166: LCDcmd( addr1[a] );
+                            991 ;     genPlus
+   02AA E5 12               992 	mov	a,_a
+   02AC 24 DF               993 	add	a,#_addr1
+   02AE F5 82               994 	mov	dpl,a
+   02B0 E5 13               995 	mov	a,(_a + 1)
+   02B2 34 06               996 	addc	a,#(_addr1 >> 8)
+   02B4 F5 83               997 	mov	dph,a
+                            998 ;     genPointerGet
+                            999 ;     genCodePointerGet
+                           1000 ;	Peephole 181	changed mov to clr
+   02B6 E4                 1001 	clr	a
+   02B7 93                 1002 	movc	a,@a+dptr
+                           1003 ;     genCall
+                           1004 ;	Peephole 244.c	loading dpl from a instead of r4
+   02B8 FC                 1005 	mov	r4,a
+   02B9 F5 82              1006 	mov	dpl,a
+   02BB 12 06 96           1007 	lcall	_LCDcmd
+                           1008 ;c:/sdcc/exam/1.c:167: LCDdata( 'v' );
+                           1009 ;     genCall
+   02BE 75 82 76           1010 	mov	dpl,#0x76
+   02C1 12 06 A9           1011 	lcall	_LCDdata
+                           1012 ;c:/sdcc/exam/1.c:168: LCDcmd( addr2[m] );
+                           1013 ;     genPlus
+   02C4 E5 0E              1014 	mov	a,_m
+   02C6 24 EF              1015 	add	a,#_addr2
+   02C8 F5 82              1016 	mov	dpl,a
+   02CA E5 0F              1017 	mov	a,(_m + 1)
+   02CC 34 06              1018 	addc	a,#(_addr2 >> 8)
+   02CE F5 83              1019 	mov	dph,a
+                           1020 ;     genPointerGet
+                           1021 ;     genCodePointerGet
+                           1022 ;	Peephole 181	changed mov to clr
+   02D0 E4                 1023 	clr	a
+   02D1 93                 1024 	movc	a,@a+dptr
+                           1025 ;     genCall
+                           1026 ;	Peephole 244.c	loading dpl from a instead of r4
+   02D2 FC                 1027 	mov	r4,a
+   02D3 F5 82              1028 	mov	dpl,a
+   02D5 12 06 96           1029 	lcall	_LCDcmd
+                           1030 ;c:/sdcc/exam/1.c:169: LCDdata( '-' );
+                           1031 ;     genCall
+   02D8 75 82 2D           1032 	mov	dpl,#0x2D
+   02DB 12 06 A9           1033 	lcall	_LCDdata
+                           1034 ;c:/sdcc/exam/1.c:170: LCDcmd( addr1[0] );
+                           1035 ;     genPointerGet
+                           1036 ;     genCodePointerGet
+   02DE 90 06 DF           1037 	mov	dptr,#_addr1
+                           1038 ;	Peephole 181	changed mov to clr
+   02E1 E4                 1039 	clr	a
+   02E2 93                 1040 	movc	a,@a+dptr
+                           1041 ;     genCall
+                           1042 ;	Peephole 244.c	loading dpl from a instead of r4
+   02E3 FC                 1043 	mov	r4,a
+   02E4 F5 82              1044 	mov	dpl,a
+   02E6 12 06 96           1045 	lcall	_LCDcmd
+                           1046 ;c:/sdcc/exam/1.c:171: LCDdata( msg[count] );
+                           1047 ;     genPlus
+   02E9 E5 1A              1048 	mov	a,_count
+   02EB 24 38              1049 	add	a,#_msg
+   02ED F5 82              1050 	mov	dpl,a
+   02EF E5 1B              1051 	mov	a,(_count + 1)
+   02F1 34 07              1052 	addc	a,#(_msg >> 8)
+   02F3 F5 83              1053 	mov	dph,a
+                           1054 ;     genPointerGet
+                           1055 ;     genCodePointerGet
+                           1056 ;	Peephole 181	changed mov to clr
+   02F5 E4                 1057 	clr	a
+   02F6 93                 1058 	movc	a,@a+dptr
+                           1059 ;     genCall
+                           1060 ;	Peephole 244.c	loading dpl from a instead of r4
+   02F7 FC                 1061 	mov	r4,a
+   02F8 F5 82              1062 	mov	dpl,a
+   02FA 12 06 A9           1063 	lcall	_LCDdata
+   02FD 02 01 37           1064 	ljmp	00142$
+   0300                    1065 00110$:
+                           1066 ;c:/sdcc/exam/1.c:173: else if(x == 14){//E
+                           1067 ;     genCmpEq
+   0300 BA 0E 05           1068 	cjne	r2,#0x0E,00209$
+   0303 BB 00 02           1069 	cjne	r3,#0x00,00209$
+   0306 80 03              1070 	sjmp	00210$
+   0308                    1071 00209$:
+   0308 02 01 37           1072 	ljmp	00142$
+   030B                    1073 00210$:
+                           1074 ;c:/sdcc/exam/1.c:174: a = 15 - a;
+                           1075 ;     genMinus
+   030B 74 0F              1076 	mov	a,#0x0F
+   030D C3                 1077 	clr	c
+   030E 95 12              1078 	subb	a,_a
+   0310 F5 12              1079 	mov	_a,a
+                           1080 ;	Peephole 181	changed mov to clr
+   0312 E4                 1081 	clr	a
+   0313 95 13              1082 	subb	a,(_a + 1)
+   0315 F5 13              1083 	mov	(_a + 1),a
+                           1084 ;c:/sdcc/exam/1.c:175: LCDcmd( addr1[a] );
+                           1085 ;     genPlus
+   0317 E5 12              1086 	mov	a,_a
+   0319 24 DF              1087 	add	a,#_addr1
+   031B F5 82              1088 	mov	dpl,a
+   031D E5 13              1089 	mov	a,(_a + 1)
+   031F 34 06              1090 	addc	a,#(_addr1 >> 8)
+   0321 F5 83              1091 	mov	dph,a
+                           1092 ;     genPointerGet
+                           1093 ;     genCodePointerGet
+                           1094 ;	Peephole 181	changed mov to clr
+   0323 E4                 1095 	clr	a
+   0324 93                 1096 	movc	a,@a+dptr
+                           1097 ;     genCall
+                           1098 ;	Peephole 244.c	loading dpl from a instead of r4
+   0325 FC                 1099 	mov	r4,a
+   0326 F5 82              1100 	mov	dpl,a
+   0328 12 06 96           1101 	lcall	_LCDcmd
+                           1102 ;c:/sdcc/exam/1.c:176: LCDdata( 'v' );
+                           1103 ;     genCall
+   032B 75 82 76           1104 	mov	dpl,#0x76
+   032E 12 06 A9           1105 	lcall	_LCDdata
+                           1106 ;c:/sdcc/exam/1.c:177: LCDcmd( addr2[m] );
+                           1107 ;     genPlus
+   0331 E5 0E              1108 	mov	a,_m
+   0333 24 EF              1109 	add	a,#_addr2
+   0335 F5 82              1110 	mov	dpl,a
+   0337 E5 0F              1111 	mov	a,(_m + 1)
+   0339 34 06              1112 	addc	a,#(_addr2 >> 8)
+   033B F5 83              1113 	mov	dph,a
+                           1114 ;     genPointerGet
+                           1115 ;     genCodePointerGet
+                           1116 ;	Peephole 181	changed mov to clr
+   033D E4                 1117 	clr	a
+   033E 93                 1118 	movc	a,@a+dptr
+                           1119 ;     genCall
+                           1120 ;	Peephole 244.c	loading dpl from a instead of r4
+   033F FC                 1121 	mov	r4,a
+   0340 F5 82              1122 	mov	dpl,a
+   0342 12 06 96           1123 	lcall	_LCDcmd
+                           1124 ;c:/sdcc/exam/1.c:178: LCDdata( '-' );
+                           1125 ;     genCall
+   0345 75 82 2D           1126 	mov	dpl,#0x2D
+   0348 12 06 A9           1127 	lcall	_LCDdata
+   034B 02 01 37           1128 	ljmp	00142$
+   034E                    1129 00136$:
+                           1130 ;c:/sdcc/exam/1.c:181: else if(state == 2){//選地鼠速度
+                           1131 ;     genCmpEq
+   034E E5 14              1132 	mov	a,_state
+   0350 B4 02 04           1133 	cjne	a,#0x02,00211$
+   0353 E5 15              1134 	mov	a,(_state + 1)
+                           1135 ;	Peephole 162	removed sjmp by inverse jump logic
+   0355 60 03              1136 	jz	00212$
+   0357                    1137 00211$:
+   0357 02 01 37           1138 	ljmp	00142$
+   035A                    1139 00212$:
+                           1140 ;c:/sdcc/exam/1.c:182: state = 1;
+                           1141 ;     genAssign
+   035A 75 14 01           1142 	mov	_state,#0x01
+   035D E4                 1143 	clr	a
+   035E F5 15              1144 	mov	(_state + 1),a
+                           1145 ;c:/sdcc/exam/1.c:183: if( x == 7 ){
+                           1146 ;     genCmpEq
+                           1147 ;	Peephole 112.b	changed ljmp to sjmp
+                           1148 ;	Peephole 198	optimized misc jump sequence
+   0360 BA 07 0C           1149 	cjne	r2,#0x07,00131$
+   0363 BB 00 09           1150 	cjne	r3,#0x00,00131$
+                           1151 ;00213$:
+                           1152 ;	Peephole 200	removed redundant sjmp
+   0366                    1153 00214$:
+                           1154 ;c:/sdcc/exam/1.c:184: COUNTER = COUNTER1;
+                           1155 ;     genAssign
+   0366 75 08 0A           1156 	mov	_COUNTER,#0x0A
+   0369 E4                 1157 	clr	a
+   036A F5 09              1158 	mov	(_COUNTER + 1),a
+   036C 02 01 37           1159 	ljmp	00142$
+   036F                    1160 00131$:
+                           1161 ;c:/sdcc/exam/1.c:186: else if( x == 8 ){
+                           1162 ;     genCmpEq
+                           1163 ;	Peephole 112.b	changed ljmp to sjmp
+                           1164 ;	Peephole 198	optimized misc jump sequence
+   036F BA 08 0C           1165 	cjne	r2,#0x08,00128$
+   0372 BB 00 09           1166 	cjne	r3,#0x00,00128$
+                           1167 ;00215$:
+                           1168 ;	Peephole 200	removed redundant sjmp
+   0375                    1169 00216$:
+                           1170 ;c:/sdcc/exam/1.c:187: COUNTER = COUNTER2;
+                           1171 ;     genAssign
+   0375 75 08 14           1172 	mov	_COUNTER,#0x14
+   0378 E4                 1173 	clr	a
+   0379 F5 09              1174 	mov	(_COUNTER + 1),a
+   037B 02 01 37           1175 	ljmp	00142$
+   037E                    1176 00128$:
+                           1177 ;c:/sdcc/exam/1.c:189: else if( x == 9 ){
+                           1178 ;     genCmpEq
+   037E BA 09 05           1179 	cjne	r2,#0x09,00217$
+   0381 BB 00 02           1180 	cjne	r3,#0x00,00217$
+   0384 80 03              1181 	sjmp	00218$
+   0386                    1182 00217$:
+   0386 02 01 37           1183 	ljmp	00142$
+   0389                    1184 00218$:
+                           1185 ;c:/sdcc/exam/1.c:190: COUNTER = COUNTER3;
+                           1186 ;     genAssign
+   0389 75 08 1E           1187 	mov	_COUNTER,#0x1E
+   038C E4                 1188 	clr	a
+   038D F5 09              1189 	mov	(_COUNTER + 1),a
+   038F 02 01 37           1190 	ljmp	00142$
+   0392                    1191 00156$:
+   0392 22                 1192 	ret
+                           1193 ;------------------------------------------------------------
+                           1194 ;Allocation info for local variables in function 'tmiintrt'
+                           1195 ;------------------------------------------------------------
+                           1196 ;------------------------------------------------------------
+                           1197 ;c:/sdcc/exam/1.c:198: void tmiintrt(void) interrupt 1  //Timer0 overflow中斷 
+                           1198 ;	-----------------------------------------
+                           1199 ;	 function tmiintrt
+                           1200 ;	-----------------------------------------
+   0393                    1201 _tmiintrt:
+   0393 C0 E0              1202 	push	acc
+   0395 C0 F0              1203 	push	b
+   0397 C0 82              1204 	push	dpl
+   0399 C0 83              1205 	push	dph
+   039B C0 02              1206 	push	(0+2)
+   039D C0 03              1207 	push	(0+3)
+   039F C0 04              1208 	push	(0+4)
+   03A1 C0 05              1209 	push	(0+5)
+   03A3 C0 06              1210 	push	(0+6)
+   03A5 C0 07              1211 	push	(0+7)
+   03A7 C0 00              1212 	push	(0+0)
+   03A9 C0 01              1213 	push	(0+1)
+   03AB C0 D0              1214 	push	psw
+   03AD 75 D0 00           1215 	mov	psw,#0x00
+                           1216 ;c:/sdcc/exam/1.c:200: TL0 = _TL0_;  //重設時間
+                           1217 ;     genAssign
+   03B0 75 8A E0           1218 	mov	_TL0,#0xE0
+                           1219 ;c:/sdcc/exam/1.c:201: TH0 = _TH0_;
+                           1220 ;     genAssign
+   03B3 75 8C 3C           1221 	mov	_TH0,#0x3C
+                           1222 ;c:/sdcc/exam/1.c:202: counter++;
+                           1223 ;     genPlus
+                           1224 ;     genPlusIncr
+   03B6 05 0A              1225 	inc	_counter
+                           1226 ;c:/sdcc/exam/1.c:203: if(counter == COUNTER)
+                           1227 ;     genCast
+                           1228 ;	peephole 177.h	optimized mov sequence
+   03B8 E5 0A              1229 	mov	a,_counter
+   03BA FA                 1230 	mov	r2,a
+   03BB 33                 1231 	rlc	a
+   03BC 95 E0              1232 	subb	a,acc
+   03BE FB                 1233 	mov	r3,a
+                           1234 ;     genCmpEq
+   03BF EA                 1235 	mov	a,r2
+   03C0 B5 08 06           1236 	cjne	a,_COUNTER,00135$
+   03C3 EB                 1237 	mov	a,r3
+   03C4 B5 09 02           1238 	cjne	a,(_COUNTER + 1),00135$
+   03C7 80 03              1239 	sjmp	00136$
+   03C9                    1240 00135$:
+   03C9 02 04 D9           1241 	ljmp	00123$
+   03CC                    1242 00136$:
+                           1243 ;c:/sdcc/exam/1.c:205: if(state == 1 && get == 0 ){
+                           1244 ;     genCmpEq
+   03CC E5 14              1245 	mov	a,_state
+   03CE B4 01 08           1246 	cjne	a,#0x01,00137$
+   03D1 E5 15              1247 	mov	a,(_state + 1)
+   03D3 70 04              1248 	jnz	00137$
+   03D5 74 01              1249 	mov	a,#0x01
+   03D7 80 01              1250 	sjmp	00138$
+   03D9                    1251 00137$:
+   03D9 E4                 1252 	clr	a
+   03DA                    1253 00138$:
+                           1254 ;     genIfx
+                           1255 ;	Peephole 105	removed redundant mov
+   03DA FA                 1256 	mov	r2,a
+                           1257 ;     genIfxJump
+   03DB 70 03              1258 	jnz	00139$
+   03DD 02 04 AC           1259 	ljmp	00118$
+   03E0                    1260 00139$:
+                           1261 ;     genCmpEq
+   03E0 E5 16              1262 	mov	a,_get
+   03E2 70 04              1263 	jnz	00140$
+   03E4 E5 17              1264 	mov	a,(_get + 1)
+                           1265 ;	Peephole 162	removed sjmp by inverse jump logic
+   03E6 60 03              1266 	jz	00141$
+   03E8                    1267 00140$:
+   03E8 02 04 AC           1268 	ljmp	00118$
+   03EB                    1269 00141$:
+                           1270 ;c:/sdcc/exam/1.c:206: if(dir_m == 1){
+                           1271 ;     genCmpEq
+   03EB E5 10              1272 	mov	a,_dir_m
+   03ED B4 01 04           1273 	cjne	a,#0x01,00142$
+   03F0 E5 11              1274 	mov	a,(_dir_m + 1)
+                           1275 ;	Peephole 162	removed sjmp by inverse jump logic
+   03F2 60 02              1276 	jz	00143$
+   03F4                    1277 00142$:
+                           1278 ;	Peephole 112.b	changed ljmp to sjmp
+   03F4 80 56              1279 	sjmp	00110$
+   03F6                    1280 00143$:
+                           1281 ;c:/sdcc/exam/1.c:207: if( m != 15 ){
+                           1282 ;     genCmpEq
+   03F6 E5 0E              1283 	mov	a,_m
+   03F8 B4 0F 04           1284 	cjne	a,#0x0F,00144$
+   03FB E5 0F              1285 	mov	a,(_m + 1)
+                           1286 ;	Peephole 110	removed ljmp by inverse jump logic
+   03FD 60 45              1287 	jz	00102$
+   03FF                    1288 00144$:
+                           1289 ;c:/sdcc/exam/1.c:208: LCDcmd( 0x01 );
+                           1290 ;     genCall
+   03FF 75 82 01           1291 	mov	dpl,#0x01
+   0402 12 06 96           1292 	lcall	_LCDcmd
+                           1293 ;c:/sdcc/exam/1.c:209: m++;
+                           1294 ;     genPlus
+                           1295 ;     genPlusIncr
+   0405 05 0E              1296 	inc	_m
+   0407 E4                 1297 	clr	a
+   0408 B5 0E 02           1298 	cjne	a,_m,00145$
+   040B 05 0F              1299 	inc	(_m + 1)
+   040D                    1300 00145$:
+                           1301 ;c:/sdcc/exam/1.c:210: LCDcmd( addr1[a] );
+                           1302 ;     genPlus
+   040D E5 12              1303 	mov	a,_a
+   040F 24 DF              1304 	add	a,#_addr1
+   0411 F5 82              1305 	mov	dpl,a
+   0413 E5 13              1306 	mov	a,(_a + 1)
+   0415 34 06              1307 	addc	a,#(_addr1 >> 8)
+   0417 F5 83              1308 	mov	dph,a
+                           1309 ;     genPointerGet
+                           1310 ;     genCodePointerGet
+                           1311 ;	Peephole 181	changed mov to clr
+   0419 E4                 1312 	clr	a
+   041A 93                 1313 	movc	a,@a+dptr
+                           1314 ;     genCall
+                           1315 ;	Peephole 244.c	loading dpl from a instead of r3
+   041B FB                 1316 	mov	r3,a
+   041C F5 82              1317 	mov	dpl,a
+   041E 12 06 96           1318 	lcall	_LCDcmd
+                           1319 ;c:/sdcc/exam/1.c:211: LCDdata( 'v' );
+                           1320 ;     genCall
+   0421 75 82 76           1321 	mov	dpl,#0x76
+   0424 12 06 A9           1322 	lcall	_LCDdata
+                           1323 ;c:/sdcc/exam/1.c:212: LCDcmd( addr2[m] );
+                           1324 ;     genPlus
+   0427 E5 0E              1325 	mov	a,_m
+   0429 24 EF              1326 	add	a,#_addr2
+   042B F5 82              1327 	mov	dpl,a
+   042D E5 0F              1328 	mov	a,(_m + 1)
+   042F 34 06              1329 	addc	a,#(_addr2 >> 8)
+   0431 F5 83              1330 	mov	dph,a
+                           1331 ;     genPointerGet
+                           1332 ;     genCodePointerGet
+                           1333 ;	Peephole 181	changed mov to clr
+   0433 E4                 1334 	clr	a
+   0434 93                 1335 	movc	a,@a+dptr
+                           1336 ;     genCall
+                           1337 ;	Peephole 244.c	loading dpl from a instead of r3
+   0435 FB                 1338 	mov	r3,a
+   0436 F5 82              1339 	mov	dpl,a
+   0438 12 06 96           1340 	lcall	_LCDcmd
+                           1341 ;c:/sdcc/exam/1.c:213: LCDdata( '*' );
+                           1342 ;     genCall
+   043B 75 82 2A           1343 	mov	dpl,#0x2A
+   043E 12 06 A9           1344 	lcall	_LCDdata
+   0441 02 04 D6           1345 	ljmp	00119$
+   0444                    1346 00102$:
+                           1347 ;c:/sdcc/exam/1.c:216: dir_m = 0;
+                           1348 ;     genAssign
+   0444 E4                 1349 	clr	a
+   0445 F5 10              1350 	mov	_dir_m,a
+   0447 F5 11              1351 	mov	(_dir_m + 1),a
+   0449 02 04 D6           1352 	ljmp	00119$
+   044C                    1353 00110$:
+                           1354 ;c:/sdcc/exam/1.c:219: else if(dir_m == 0){
+                           1355 ;     genCmpEq
+   044C E5 10              1356 	mov	a,_dir_m
+   044E 70 04              1357 	jnz	00146$
+   0450 E5 11              1358 	mov	a,(_dir_m + 1)
+                           1359 ;	Peephole 162	removed sjmp by inverse jump logic
+   0452 60 03              1360 	jz	00147$
+   0454                    1361 00146$:
+   0454 02 04 D6           1362 	ljmp	00119$
+   0457                    1363 00147$:
+                           1364 ;c:/sdcc/exam/1.c:220: if( m != 0 ){
+                           1365 ;     genCmpEq
+   0457 E5 0E              1366 	mov	a,_m
+   0459 70 04              1367 	jnz	00148$
+   045B E5 0F              1368 	mov	a,(_m + 1)
+                           1369 ;	Peephole 110	removed ljmp by inverse jump logic
+   045D 60 45              1370 	jz	00105$
+   045F                    1371 00148$:
+                           1372 ;c:/sdcc/exam/1.c:221: LCDcmd( 0x01 );
+                           1373 ;     genCall
+   045F 75 82 01           1374 	mov	dpl,#0x01
+   0462 12 06 96           1375 	lcall	_LCDcmd
+                           1376 ;c:/sdcc/exam/1.c:222: m--;
+                           1377 ;     genMinus
+                           1378 ;     genMinusDec
+   0465 15 0E              1379 	dec	_m
+   0467 74 FF              1380 	mov	a,#0xff
+   0469 B5 0E 02           1381 	cjne	a,_m,00149$
+   046C 15 0F              1382 	dec	(_m + 1)
+   046E                    1383 00149$:
+                           1384 ;c:/sdcc/exam/1.c:223: LCDcmd( addr1[a] );
+                           1385 ;     genPlus
+   046E E5 12              1386 	mov	a,_a
+   0470 24 DF              1387 	add	a,#_addr1
+   0472 F5 82              1388 	mov	dpl,a
+   0474 E5 13              1389 	mov	a,(_a + 1)
+   0476 34 06              1390 	addc	a,#(_addr1 >> 8)
+   0478 F5 83              1391 	mov	dph,a
+                           1392 ;     genPointerGet
+                           1393 ;     genCodePointerGet
+                           1394 ;	Peephole 181	changed mov to clr
+   047A E4                 1395 	clr	a
+   047B 93                 1396 	movc	a,@a+dptr
+                           1397 ;     genCall
+                           1398 ;	Peephole 244.c	loading dpl from a instead of r3
+   047C FB                 1399 	mov	r3,a
+   047D F5 82              1400 	mov	dpl,a
+   047F 12 06 96           1401 	lcall	_LCDcmd
+                           1402 ;c:/sdcc/exam/1.c:224: LCDdata( 'v' );
+                           1403 ;     genCall
+   0482 75 82 76           1404 	mov	dpl,#0x76
+   0485 12 06 A9           1405 	lcall	_LCDdata
+                           1406 ;c:/sdcc/exam/1.c:225: LCDcmd( addr2[m] );
+                           1407 ;     genPlus
+   0488 E5 0E              1408 	mov	a,_m
+   048A 24 EF              1409 	add	a,#_addr2
+   048C F5 82              1410 	mov	dpl,a
+   048E E5 0F              1411 	mov	a,(_m + 1)
+   0490 34 06              1412 	addc	a,#(_addr2 >> 8)
+   0492 F5 83              1413 	mov	dph,a
+                           1414 ;     genPointerGet
+                           1415 ;     genCodePointerGet
+                           1416 ;	Peephole 181	changed mov to clr
+   0494 E4                 1417 	clr	a
+   0495 93                 1418 	movc	a,@a+dptr
+                           1419 ;     genCall
+                           1420 ;	Peephole 244.c	loading dpl from a instead of r3
+   0496 FB                 1421 	mov	r3,a
+   0497 F5 82              1422 	mov	dpl,a
+   0499 12 06 96           1423 	lcall	_LCDcmd
+                           1424 ;c:/sdcc/exam/1.c:226: LCDdata( '*' );
+                           1425 ;     genCall
+   049C 75 82 2A           1426 	mov	dpl,#0x2A
+   049F 12 06 A9           1427 	lcall	_LCDdata
+                           1428 ;	Peephole 112.b	changed ljmp to sjmp
+   04A2 80 32              1429 	sjmp	00119$
+   04A4                    1430 00105$:
+                           1431 ;c:/sdcc/exam/1.c:228: dir_m = 1;
+                           1432 ;     genAssign
+   04A4 75 10 01           1433 	mov	_dir_m,#0x01
+   04A7 E4                 1434 	clr	a
+   04A8 F5 11              1435 	mov	(_dir_m + 1),a
+                           1436 ;	Peephole 112.b	changed ljmp to sjmp
+   04AA 80 2A              1437 	sjmp	00119$
+   04AC                    1438 00118$:
+                           1439 ;c:/sdcc/exam/1.c:233: else if(state == 1 && get == 1 ){
+                           1440 ;     genIfx
+   04AC EA                 1441 	mov	a,r2
+                           1442 ;     genIfxJump
+                           1443 ;	Peephole 110	removed ljmp by inverse jump logic
+   04AD 60 27              1444 	jz	00119$
+   04AF                    1445 00150$:
+                           1446 ;     genCmpEq
+   04AF E5 16              1447 	mov	a,_get
+   04B1 B4 01 04           1448 	cjne	a,#0x01,00151$
+   04B4 E5 17              1449 	mov	a,(_get + 1)
+                           1450 ;	Peephole 162	removed sjmp by inverse jump logic
+   04B6 60 02              1451 	jz	00152$
+   04B8                    1452 00151$:
+                           1453 ;	Peephole 112.b	changed ljmp to sjmp
+   04B8 80 1C              1454 	sjmp	00119$
+   04BA                    1455 00152$:
+                           1456 ;c:/sdcc/exam/1.c:234: c++;
+                           1457 ;     genPlus
+                           1458 ;     genPlusIncr
+   04BA 05 18              1459 	inc	_c
+   04BC E4                 1460 	clr	a
+   04BD B5 18 02           1461 	cjne	a,_c,00153$
+   04C0 05 19              1462 	inc	(_c + 1)
+   04C2                    1463 00153$:
+                           1464 ;c:/sdcc/exam/1.c:235: if( c == 3 ){
+                           1465 ;     genCmpEq
+   04C2 E5 18              1466 	mov	a,_c
+   04C4 B4 03 04           1467 	cjne	a,#0x03,00154$
+   04C7 E5 19              1468 	mov	a,(_c + 1)
+                           1469 ;	Peephole 162	removed sjmp by inverse jump logic
+   04C9 60 02              1470 	jz	00155$
+   04CB                    1471 00154$:
+                           1472 ;	Peephole 112.b	changed ljmp to sjmp
+   04CB 80 09              1473 	sjmp	00119$
+   04CD                    1474 00155$:
+                           1475 ;c:/sdcc/exam/1.c:236: c = 0;
+                           1476 ;     genAssign
+                           1477 ;c:/sdcc/exam/1.c:237: get = 0;
+                           1478 ;     genAssign
+   04CD E4                 1479 	clr	a
+   04CE F5 18              1480 	mov	_c,a
+   04D0 F5 19              1481 	mov	(_c + 1),a
+                           1482 ;	Peephole 3.d	removed redundant clr
+   04D2 F5 16              1483 	mov	_get,a
+   04D4 F5 17              1484 	mov	(_get + 1),a
+   04D6                    1485 00119$:
+                           1486 ;c:/sdcc/exam/1.c:240: counter = 0;//////////////////////////////
+                           1487 ;     genAssign
+   04D6 75 0A 00           1488 	mov	_counter,#0x00
+   04D9                    1489 00123$:
+   04D9 D0 D0              1490 	pop	psw
+   04DB D0 01              1491 	pop	(0+1)
+   04DD D0 00              1492 	pop	(0+0)
+   04DF D0 07              1493 	pop	(0+7)
+   04E1 D0 06              1494 	pop	(0+6)
+   04E3 D0 05              1495 	pop	(0+5)
+   04E5 D0 04              1496 	pop	(0+4)
+   04E7 D0 03              1497 	pop	(0+3)
+   04E9 D0 02              1498 	pop	(0+2)
+   04EB D0 83              1499 	pop	dph
+   04ED D0 82              1500 	pop	dpl
+   04EF D0 F0              1501 	pop	b
+   04F1 D0 E0              1502 	pop	acc
+   04F3 32                 1503 	reti
+                           1504 ;------------------------------------------------------------
+                           1505 ;Allocation info for local variables in function 'interr_s'
+                           1506 ;------------------------------------------------------------
+                           1507 ;------------------------------------------------------------
+                           1508 ;c:/sdcc/exam/1.c:246: void interr_s(void) interrupt 4  //(? serial interrupt) 
+                           1509 ;	-----------------------------------------
+                           1510 ;	 function interr_s
+                           1511 ;	-----------------------------------------
+   04F4                    1512 _interr_s:
+   04F4 C0 E0              1513 	push	acc
+   04F6 C0 F0              1514 	push	b
+   04F8 C0 82              1515 	push	dpl
+   04FA C0 83              1516 	push	dph
+   04FC C0 02              1517 	push	(0+2)
+   04FE C0 03              1518 	push	(0+3)
+   0500 C0 04              1519 	push	(0+4)
+   0502 C0 05              1520 	push	(0+5)
+   0504 C0 06              1521 	push	(0+6)
+   0506 C0 07              1522 	push	(0+7)
+   0508 C0 00              1523 	push	(0+0)
+   050A C0 01              1524 	push	(0+1)
+   050C C0 D0              1525 	push	psw
+   050E 75 D0 00           1526 	mov	psw,#0x00
+                           1527 ;c:/sdcc/exam/1.c:248: if (RI)
+                           1528 ;     genIfx
+                           1529 ;     genIfxJump
+                           1530 ;	Peephole 111	removed ljmp by inverse jump logic
+                           1531 ;c:/sdcc/exam/1.c:250: RI = 0;
+                           1532 ;     genAssign
+                           1533 ;	Peephole 250.a	using atomic test and clear
+   0511 10 98 02           1534 	jbc	_RI,00107$
+   0514 80 17              1535 	sjmp	00102$
+   0516                    1536 00107$:
+                           1537 ;c:/sdcc/exam/1.c:251: rx_flag = 1; 
+                           1538 ;     genAssign
+   0516 75 0B 01           1539 	mov	_rx_flag,#0x01
+   0519 E4                 1540 	clr	a
+   051A F5 0C              1541 	mov	(_rx_flag + 1),a
+                           1542 ;c:/sdcc/exam/1.c:252: ch = SBUF;
+                           1543 ;     genAssign
+   051C 85 99 0D           1544 	mov	_ch,_SBUF
+                           1545 ;c:/sdcc/exam/1.c:253: LCDcmd(0xc0); 
+                           1546 ;     genCall
+   051F 75 82 C0           1547 	mov	dpl,#0xC0
+   0522 12 06 96           1548 	lcall	_LCDcmd
+                           1549 ;c:/sdcc/exam/1.c:254: LCDdata(ch);
+                           1550 ;     genCall
+   0525 85 0D 82           1551 	mov	dpl,_ch
+   0528 12 06 A9           1552 	lcall	_LCDdata
+                           1553 ;	Peephole 112.b	changed ljmp to sjmp
+   052B 80 02              1554 	sjmp	00104$
+   052D                    1555 00102$:
+                           1556 ;c:/sdcc/exam/1.c:258: TI = 0;
+                           1557 ;     genAssign
+   052D C2 99              1558 	clr	_TI
+   052F                    1559 00104$:
+   052F D0 D0              1560 	pop	psw
+   0531 D0 01              1561 	pop	(0+1)
+   0533 D0 00              1562 	pop	(0+0)
+   0535 D0 07              1563 	pop	(0+7)
+   0537 D0 06              1564 	pop	(0+6)
+   0539 D0 05              1565 	pop	(0+5)
+   053B D0 04              1566 	pop	(0+4)
+   053D D0 03              1567 	pop	(0+3)
+   053F D0 02              1568 	pop	(0+2)
+   0541 D0 83              1569 	pop	dph
+   0543 D0 82              1570 	pop	dpl
+   0545 D0 F0              1571 	pop	b
+   0547 D0 E0              1572 	pop	acc
+   0549 32                 1573 	reti
+                           1574 ;------------------------------------------------------------
+                           1575 ;Allocation info for local variables in function 'getkey'
+                           1576 ;------------------------------------------------------------
+                           1577 ;i                         Allocated to registers r4 r5 
+                           1578 ;k                         Allocated to registers r2 r3 
+                           1579 ;------------------------------------------------------------
+                           1580 ;c:/sdcc/exam/1.c:261: int getkey()  //<<上次的 
+                           1581 ;	-----------------------------------------
+                           1582 ;	 function getkey
+                           1583 ;	-----------------------------------------
+   054A                    1584 _getkey:
+                           1585 ;c:/sdcc/exam/1.c:263: int i,k=-1; 
+                           1586 ;     genAssign
+   054A 7A FF              1587 	mov	r2,#0xFF
+   054C 7B FF              1588 	mov	r3,#0xFF
+                           1589 ;c:/sdcc/exam/1.c:264: while(1)
+                           1590 ;c:/sdcc/exam/1.c:266: for(i=0;i<4;i++)
+   054E                    1591 00139$:
+                           1592 ;     genAssign
+   054E 7C 00              1593 	mov	r4,#0x00
+   0550 7D 00              1594 	mov	r5,#0x00
+   0552                    1595 00116$:
+                           1596 ;     genCmpLt
+                           1597 ;     genCmp
+   0552 C3                 1598 	clr	c
+   0553 EC                 1599 	mov	a,r4
+   0554 94 04              1600 	subb	a,#0x04
+   0556 ED                 1601 	mov	a,r5
+   0557 64 80              1602 	xrl	a,#0x80
+   0559 94 80              1603 	subb	a,#0x80
+                           1604 ;     genIfxJump
+   055B 40 03              1605 	jc	00143$
+   055D 02 06 71           1606 	ljmp	00119$
+   0560                    1607 00143$:
+                           1608 ;c:/sdcc/exam/1.c:268: P1=ser[i]; 
+                           1609 ;     genPlus
+                           1610 ;	Peephole 236.g	used r4 instead of ar4
+   0560 EC                 1611 	mov	a,r4
+   0561 24 04              1612 	add	a,#_ser
+   0563 F5 82              1613 	mov	dpl,a
+                           1614 ;	Peephole 236.g	used r5 instead of ar5
+   0565 ED                 1615 	mov	a,r5
+   0566 34 07              1616 	addc	a,#(_ser >> 8)
+   0568 F5 83              1617 	mov	dph,a
+                           1618 ;     genPointerGet
+                           1619 ;     genCodePointerGet
+                           1620 ;	Peephole 181	changed mov to clr
+   056A E4                 1621 	clr	a
+   056B 93                 1622 	movc	a,@a+dptr
+   056C FE                 1623 	mov	r6,a
+                           1624 ;     genAssign
+   056D 8E 90              1625 	mov	_P1,r6
+                           1626 ;c:/sdcc/exam/1.c:269: if(P1!=ser[i])
+                           1627 ;     genAssign
+                           1628 ;     genCmpEq
+                           1629 ;	peephole 177.g	optimized mov sequence
+   056F E5 90              1630 	mov	a,_P1
+   0571 FF                 1631 	mov	r7,a
+   0572 B5 06 03           1632 	cjne	a,ar6,00144$
+   0575 02 06 63           1633 	ljmp	00113$
+   0578                    1634 00144$:
+                           1635 ;c:/sdcc/exam/1.c:271: if(P1==keymsg[i]) 
+                           1636 ;     genPlus
+                           1637 ;	Peephole 236.g	used r4 instead of ar4
+   0578 EC                 1638 	mov	a,r4
+   0579 24 28              1639 	add	a,#_keymsg
+   057B F5 82              1640 	mov	dpl,a
+                           1641 ;	Peephole 236.g	used r5 instead of ar5
+   057D ED                 1642 	mov	a,r5
+   057E 34 07              1643 	addc	a,#(_keymsg >> 8)
+   0580 F5 83              1644 	mov	dph,a
+                           1645 ;     genPointerGet
+                           1646 ;     genCodePointerGet
+                           1647 ;	Peephole 181	changed mov to clr
+   0582 E4                 1648 	clr	a
+   0583 93                 1649 	movc	a,@a+dptr
+   0584 FE                 1650 	mov	r6,a
+                           1651 ;     genAssign
+                           1652 ;     genCmpEq
+                           1653 ;	peephole 177.g	optimized mov sequence
+   0585 E5 90              1654 	mov	a,_P1
+   0587 FF                 1655 	mov	r7,a
+                           1656 ;	Peephole 112.b	changed ljmp to sjmp
+                           1657 ;	Peephole 199	optimized misc jump sequence
+   0588 B5 06 1D           1658 	cjne	a,ar6,00110$
+                           1659 ;00145$:
+                           1660 ;	Peephole 200	removed redundant sjmp
+   058B                    1661 00146$:
+                           1662 ;c:/sdcc/exam/1.c:272: k=key[i];
+                           1663 ;     genLeftShift
+                           1664 ;     genLeftShiftLiteral
+                           1665 ;     genlshTwo
+   058B 8C 06              1666 	mov	ar6,r4
+   058D ED                 1667 	mov	a,r5
+   058E CE                 1668 	xch	a,r6
+   058F 25 E0              1669 	add	a,acc
+   0591 CE                 1670 	xch	a,r6
+   0592 33                 1671 	rlc	a
+   0593 FF                 1672 	mov	r7,a
+                           1673 ;     genPlus
+                           1674 ;	Peephole 236.g	used r6 instead of ar6
+   0594 EE                 1675 	mov	a,r6
+   0595 24 08              1676 	add	a,#_key
+   0597 F5 82              1677 	mov	dpl,a
+                           1678 ;	Peephole 236.g	used r7 instead of ar7
+   0599 EF                 1679 	mov	a,r7
+   059A 34 07              1680 	addc	a,#(_key >> 8)
+   059C F5 83              1681 	mov	dph,a
+                           1682 ;     genPointerGet
+                           1683 ;     genCodePointerGet
+                           1684 ;	Peephole 181	changed mov to clr
+   059E E4                 1685 	clr	a
+   059F 93                 1686 	movc	a,@a+dptr
+   05A0 FA                 1687 	mov	r2,a
+   05A1 74 01              1688 	mov	a,#0x01
+   05A3 93                 1689 	movc	a,@a+dptr
+   05A4 FB                 1690 	mov	r3,a
+   05A5 02 06 63           1691 	ljmp	00113$
+   05A8                    1692 00110$:
+                           1693 ;c:/sdcc/exam/1.c:273: else if(P1==keymsg[i+4])
+                           1694 ;     genCast
+   05A8 8C 06              1695 	mov	ar6,r4
+                           1696 ;     genPlus
+                           1697 ;     genPlusIncr
+   05AA 74 04              1698 	mov	a,#0x04
+                           1699 ;	Peephole 236.a	used r6 instead of ar6
+   05AC 2E                 1700 	add	a,r6
+                           1701 ;     genPlus
+                           1702 ;	Peephole 240	use clr instead of addc a,#0
+                           1703 ;     genPointerGet
+                           1704 ;     genCodePointerGet
+                           1705 ;	Peephole 181	changed mov to clr
+                           1706 ;	Peephole 186.d	optimized movc sequence
+   05AD 90 07 28           1707 	mov	dptr,#_keymsg
+   05B0 93                 1708 	movc	a,@a+dptr
+   05B1 FF                 1709 	mov	r7,a
+                           1710 ;     genAssign
+                           1711 ;     genCmpEq
+                           1712 ;	peephole 177.g	optimized mov sequence
+   05B2 E5 90              1713 	mov	a,_P1
+   05B4 F8                 1714 	mov	r0,a
+                           1715 ;	Peephole 112.b	changed ljmp to sjmp
+                           1716 ;	Peephole 199	optimized misc jump sequence
+   05B5 B5 07 31           1717 	cjne	a,ar7,00107$
+                           1718 ;00147$:
+                           1719 ;	Peephole 200	removed redundant sjmp
+   05B8                    1720 00148$:
+                           1721 ;c:/sdcc/exam/1.c:274: k=key[i+4];
+                           1722 ;     genPlus
+                           1723 ;     genPlusIncr
+   05B8 74 04              1724 	mov	a,#0x04
+                           1725 ;	Peephole 236.a	used r6 instead of ar6
+   05BA 2E                 1726 	add	a,r6
+                           1727 ;     genMult
+                           1728 ;     genMultOneByte
+   05BB C2 D5              1729 	clr	F0
+   05BD 75 F0 02           1730 	mov	b,#0x02
+   05C0 30 E7 04           1731 	jnb	acc.7,00149$
+   05C3 B2 D5              1732 	cpl	F0
+   05C5 F4                 1733 	cpl	a
+   05C6 04                 1734 	inc	a
+   05C7                    1735 00149$:
+   05C7 A4                 1736 	mul	ab
+   05C8 30 D5 0A           1737 	jnb	F0,00150$
+   05CB F4                 1738 	cpl	a
+   05CC 24 01              1739 	add	a,#1
+   05CE C5 F0              1740 	xch	a,b
+   05D0 F4                 1741 	cpl	a
+   05D1 34 00              1742 	addc	a,#0
+   05D3 C5 F0              1743 	xch	a,b
+   05D5                    1744 00150$:
+                           1745 ;     genPlus
+   05D5 24 08              1746 	add	a,#_key
+   05D7 F5 82              1747 	mov	dpl,a
+   05D9 74 07              1748 	mov	a,#(_key >> 8)
+   05DB 35 F0              1749 	addc	a,b
+   05DD F5 83              1750 	mov	dph,a
+                           1751 ;     genPointerGet
+                           1752 ;     genCodePointerGet
+                           1753 ;	Peephole 181	changed mov to clr
+   05DF E4                 1754 	clr	a
+   05E0 93                 1755 	movc	a,@a+dptr
+   05E1 FA                 1756 	mov	r2,a
+   05E2 74 01              1757 	mov	a,#0x01
+   05E4 93                 1758 	movc	a,@a+dptr
+   05E5 FB                 1759 	mov	r3,a
+   05E6 02 06 63           1760 	ljmp	00113$
+   05E9                    1761 00107$:
+                           1762 ;c:/sdcc/exam/1.c:275: else if(P1==keymsg[i+8]) 
+                           1763 ;     genPlus
+   05E9 74 08              1764 	mov	a,#0x08
+                           1765 ;	Peephole 236.a	used r6 instead of ar6
+   05EB 2E                 1766 	add	a,r6
+                           1767 ;     genPlus
+                           1768 ;	Peephole 240	use clr instead of addc a,#0
+                           1769 ;     genPointerGet
+                           1770 ;     genCodePointerGet
+                           1771 ;	Peephole 181	changed mov to clr
+                           1772 ;	Peephole 186.d	optimized movc sequence
+   05EC 90 07 28           1773 	mov	dptr,#_keymsg
+   05EF 93                 1774 	movc	a,@a+dptr
+   05F0 FF                 1775 	mov	r7,a
+                           1776 ;     genAssign
+                           1777 ;     genCmpEq
+                           1778 ;	peephole 177.g	optimized mov sequence
+   05F1 E5 90              1779 	mov	a,_P1
+   05F3 F8                 1780 	mov	r0,a
+                           1781 ;	Peephole 112.b	changed ljmp to sjmp
+                           1782 ;	Peephole 199	optimized misc jump sequence
+   05F4 B5 07 30           1783 	cjne	a,ar7,00104$
+                           1784 ;00151$:
+                           1785 ;	Peephole 200	removed redundant sjmp
+   05F7                    1786 00152$:
+                           1787 ;c:/sdcc/exam/1.c:276: k=key[i+8];
+                           1788 ;     genPlus
+   05F7 74 08              1789 	mov	a,#0x08
+                           1790 ;	Peephole 236.a	used r6 instead of ar6
+   05F9 2E                 1791 	add	a,r6
+                           1792 ;     genMult
+                           1793 ;     genMultOneByte
+   05FA C2 D5              1794 	clr	F0
+   05FC 75 F0 02           1795 	mov	b,#0x02
+   05FF 30 E7 04           1796 	jnb	acc.7,00153$
+   0602 B2 D5              1797 	cpl	F0
+   0604 F4                 1798 	cpl	a
+   0605 04                 1799 	inc	a
+   0606                    1800 00153$:
+   0606 A4                 1801 	mul	ab
+   0607 30 D5 0A           1802 	jnb	F0,00154$
+   060A F4                 1803 	cpl	a
+   060B 24 01              1804 	add	a,#1
+   060D C5 F0              1805 	xch	a,b
+   060F F4                 1806 	cpl	a
+   0610 34 00              1807 	addc	a,#0
+   0612 C5 F0              1808 	xch	a,b
+   0614                    1809 00154$:
+                           1810 ;     genPlus
+   0614 24 08              1811 	add	a,#_key
+   0616 F5 82              1812 	mov	dpl,a
+   0618 74 07              1813 	mov	a,#(_key >> 8)
+   061A 35 F0              1814 	addc	a,b
+   061C F5 83              1815 	mov	dph,a
+                           1816 ;     genPointerGet
+                           1817 ;     genCodePointerGet
+                           1818 ;	Peephole 181	changed mov to clr
+   061E E4                 1819 	clr	a
+   061F 93                 1820 	movc	a,@a+dptr
+   0620 FA                 1821 	mov	r2,a
+   0621 74 01              1822 	mov	a,#0x01
+   0623 93                 1823 	movc	a,@a+dptr
+   0624 FB                 1824 	mov	r3,a
+                           1825 ;	Peephole 112.b	changed ljmp to sjmp
+   0625 80 3C              1826 	sjmp	00113$
+   0627                    1827 00104$:
+                           1828 ;c:/sdcc/exam/1.c:277: else if(P1==keymsg[i+12]) 
+                           1829 ;     genPlus
+   0627 74 0C              1830 	mov	a,#0x0C
+                           1831 ;	Peephole 236.a	used r6 instead of ar6
+   0629 2E                 1832 	add	a,r6
+                           1833 ;     genPlus
+                           1834 ;	Peephole 240	use clr instead of addc a,#0
+                           1835 ;     genPointerGet
+                           1836 ;     genCodePointerGet
+                           1837 ;	Peephole 181	changed mov to clr
+                           1838 ;	Peephole 186.d	optimized movc sequence
+   062A 90 07 28           1839 	mov	dptr,#_keymsg
+   062D 93                 1840 	movc	a,@a+dptr
+   062E FF                 1841 	mov	r7,a
+                           1842 ;     genAssign
+                           1843 ;     genCmpEq
+                           1844 ;	peephole 177.g	optimized mov sequence
+   062F E5 90              1845 	mov	a,_P1
+   0631 F8                 1846 	mov	r0,a
+                           1847 ;	Peephole 112.b	changed ljmp to sjmp
+                           1848 ;	Peephole 199	optimized misc jump sequence
+   0632 B5 07 2E           1849 	cjne	a,ar7,00113$
+                           1850 ;00155$:
+                           1851 ;	Peephole 200	removed redundant sjmp
+   0635                    1852 00156$:
+                           1853 ;c:/sdcc/exam/1.c:278: k=key[i+12];
+                           1854 ;     genPlus
+   0635 74 0C              1855 	mov	a,#0x0C
+                           1856 ;	Peephole 236.a	used r6 instead of ar6
+   0637 2E                 1857 	add	a,r6
+                           1858 ;     genMult
+                           1859 ;     genMultOneByte
+   0638 C2 D5              1860 	clr	F0
+   063A 75 F0 02           1861 	mov	b,#0x02
+   063D 30 E7 04           1862 	jnb	acc.7,00157$
+   0640 B2 D5              1863 	cpl	F0
+   0642 F4                 1864 	cpl	a
+   0643 04                 1865 	inc	a
+   0644                    1866 00157$:
+   0644 A4                 1867 	mul	ab
+   0645 30 D5 0A           1868 	jnb	F0,00158$
+   0648 F4                 1869 	cpl	a
+   0649 24 01              1870 	add	a,#1
+   064B C5 F0              1871 	xch	a,b
+   064D F4                 1872 	cpl	a
+   064E 34 00              1873 	addc	a,#0
+   0650 C5 F0              1874 	xch	a,b
+   0652                    1875 00158$:
+                           1876 ;     genPlus
+   0652 24 08              1877 	add	a,#_key
+   0654 F5 82              1878 	mov	dpl,a
+   0656 74 07              1879 	mov	a,#(_key >> 8)
+   0658 35 F0              1880 	addc	a,b
+   065A F5 83              1881 	mov	dph,a
+                           1882 ;     genPointerGet
+                           1883 ;     genCodePointerGet
+                           1884 ;	Peephole 181	changed mov to clr
+   065C E4                 1885 	clr	a
+   065D 93                 1886 	movc	a,@a+dptr
+   065E FA                 1887 	mov	r2,a
+   065F 74 01              1888 	mov	a,#0x01
+   0661 93                 1889 	movc	a,@a+dptr
+   0662 FB                 1890 	mov	r3,a
+   0663                    1891 00113$:
+                           1892 ;c:/sdcc/exam/1.c:280: if (k!=-1) 
+                           1893 ;     genCmpEq
+                           1894 ;	Peephole 112.b	changed ljmp to sjmp
+                           1895 ;	Peephole 198	optimized misc jump sequence
+   0663 BA FF 0B           1896 	cjne	r2,#0xFF,00119$
+   0666 BB FF 08           1897 	cjne	r3,#0xFF,00119$
+                           1898 ;00159$:
+                           1899 ;	Peephole 200	removed redundant sjmp
+   0669                    1900 00160$:
+                           1901 ;c:/sdcc/exam/1.c:266: for(i=0;i<4;i++)
+                           1902 ;     genPlus
+                           1903 ;     genPlusIncr
+   0669 0C                 1904 	inc	r4
+   066A BC 00 01           1905 	cjne	r4,#0x00,00161$
+   066D 0D                 1906 	inc	r5
+   066E                    1907 00161$:
+   066E 02 05 52           1908 	ljmp	00116$
+   0671                    1909 00119$:
+                           1910 ;c:/sdcc/exam/1.c:283: if(k!=-1)
+                           1911 ;     genCmpEq
+   0671 BA FF 06           1912 	cjne	r2,#0xFF,00162$
+   0674 BB FF 03           1913 	cjne	r3,#0xFF,00162$
+   0677 02 05 4E           1914 	ljmp	00139$
+   067A                    1915 00162$:
+                           1916 ;c:/sdcc/exam/1.c:284: while(1)
+                           1917 ;     genPlus
+                           1918 ;	Peephole 236.g	used r4 instead of ar4
+   067A EC                 1919 	mov	a,r4
+   067B 24 04              1920 	add	a,#_ser
+   067D FC                 1921 	mov	r4,a
+                           1922 ;	Peephole 236.g	used r5 instead of ar5
+   067E ED                 1923 	mov	a,r5
+   067F 34 07              1924 	addc	a,#(_ser >> 8)
+   0681 FD                 1925 	mov	r5,a
+   0682                    1926 00123$:
+                           1927 ;c:/sdcc/exam/1.c:286: P1=ser[i]; 
+                           1928 ;     genPointerGet
+                           1929 ;     genCodePointerGet
+   0682 8C 82              1930 	mov	dpl,r4
+   0684 8D 83              1931 	mov	dph,r5
+                           1932 ;	Peephole 181	changed mov to clr
+   0686 E4                 1933 	clr	a
+   0687 93                 1934 	movc	a,@a+dptr
+   0688 FE                 1935 	mov	r6,a
+                           1936 ;     genAssign
+   0689 8E 90              1937 	mov	_P1,r6
+                           1938 ;c:/sdcc/exam/1.c:287: if(P1==ser[i])
+                           1939 ;     genAssign
+                           1940 ;     genCmpEq
+                           1941 ;	peephole 177.g	optimized mov sequence
+   068B E5 90              1942 	mov	a,_P1
+   068D FF                 1943 	mov	r7,a
+                           1944 ;	Peephole 112.b	changed ljmp to sjmp
+                           1945 ;	Peephole 199	optimized misc jump sequence
+   068E B5 06 F1           1946 	cjne	a,ar6,00123$
+                           1947 ;00163$:
+                           1948 ;	Peephole 200	removed redundant sjmp
+   0691                    1949 00164$:
+                           1950 ;c:/sdcc/exam/1.c:288: return k;
+                           1951 ;     genRet
+   0691 8A 82              1952 	mov	dpl,r2
+   0693 8B 83              1953 	mov	dph,r3
+   0695                    1954 00130$:
+   0695 22                 1955 	ret
+                           1956 ;------------------------------------------------------------
+                           1957 ;Allocation info for local variables in function 'LCDcmd'
+                           1958 ;------------------------------------------------------------
+                           1959 ;hex                       Allocated to registers r2 
+                           1960 ;------------------------------------------------------------
+                           1961 ;c:/sdcc/exam/1.c:293: void LCDcmd(char hex) 
+                           1962 ;	-----------------------------------------
+                           1963 ;	 function LCDcmd
+                           1964 ;	-----------------------------------------
+   0696                    1965 _LCDcmd:
+                           1966 ;     genReceive
+   0696 AA 82              1967 	mov	r2,dpl
+                           1968 ;c:/sdcc/exam/1.c:295: delay(1000);  //延遲一下，避免按下按鍵的短暫電位晃動(Debounce) 
+                           1969 ;     genCall
+                           1970 ;	Peephole 182.b	used 16 bit load of dptr
+   0698 90 03 E8           1971 	mov	dptr,#0x03E8
+   069B C0 02              1972 	push	ar2
+   069D 12 06 C0           1973 	lcall	_delay
+   06A0 D0 02              1974 	pop	ar2
+                           1975 ;c:/sdcc/exam/1.c:296: P2 = hex;     //P2放入指令 
+                           1976 ;     genAssign
+   06A2 8A A0              1977 	mov	_P2,r2
+                           1978 ;c:/sdcc/exam/1.c:297: P3_4 = 1;     //ENABLE = 1  LCD致能 
+                           1979 ;     genAssign
+   06A4 D2 B4              1980 	setb	_P3_4
+                           1981 ;c:/sdcc/exam/1.c:298: P3_4 = 0;     //ENABLE = 0  關閉LCD致能 
+                           1982 ;     genAssign
+   06A6 C2 B4              1983 	clr	_P3_4
+   06A8                    1984 00101$:
+   06A8 22                 1985 	ret
+                           1986 ;------------------------------------------------------------
+                           1987 ;Allocation info for local variables in function 'LCDdata'
+                           1988 ;------------------------------------------------------------
+                           1989 ;hex                       Allocated to registers r2 
+                           1990 ;------------------------------------------------------------
+                           1991 ;c:/sdcc/exam/1.c:301: void LCDdata(char hex)
+                           1992 ;	-----------------------------------------
+                           1993 ;	 function LCDdata
+                           1994 ;	-----------------------------------------
+   06A9                    1995 _LCDdata:
+                           1996 ;     genReceive
+   06A9 AA 82              1997 	mov	r2,dpl
+                           1998 ;c:/sdcc/exam/1.c:303: delay(1000);  //延遲一下，避免按下按鍵的短暫電位晃動(Debounce) 
+                           1999 ;     genCall
+                           2000 ;	Peephole 182.b	used 16 bit load of dptr
+   06AB 90 03 E8           2001 	mov	dptr,#0x03E8
+   06AE C0 02              2002 	push	ar2
+   06B0 12 06 C0           2003 	lcall	_delay
+   06B3 D0 02              2004 	pop	ar2
+                           2005 ;c:/sdcc/exam/1.c:304: P2 = hex;     //P2放入指令 
+                           2006 ;     genAssign
+   06B5 8A A0              2007 	mov	_P2,r2
+                           2008 ;c:/sdcc/exam/1.c:305: P3_4 = 1;     //ENABLE = 1  LCD致能 
+                           2009 ;     genAssign
+   06B7 D2 B4              2010 	setb	_P3_4
+                           2011 ;c:/sdcc/exam/1.c:306: P3_2 = 1;     //RS = 1  (R_W依舊是0) 寫資料到DDRAM或CGRAM 
+                           2012 ;     genAssign
+   06B9 D2 B2              2013 	setb	_P3_2
+                           2014 ;c:/sdcc/exam/1.c:307: P3_4 = 0;     //ENABLE = 0  關閉LCD致能  
+                           2015 ;     genAssign
+   06BB C2 B4              2016 	clr	_P3_4
+                           2017 ;c:/sdcc/exam/1.c:308: P3_2 = 0;     //RS = 0  (R_W依舊是0) 恢復寫命令到LCD的狀態 
+                           2018 ;     genAssign
+   06BD C2 B2              2019 	clr	_P3_2
+   06BF                    2020 00101$:
+   06BF 22                 2021 	ret
+                           2022 ;------------------------------------------------------------
+                           2023 ;Allocation info for local variables in function 'delay'
+                           2024 ;------------------------------------------------------------
+                           2025 ;t                         Allocated to registers r2 r3 
+                           2026 ;i                         Allocated to registers r4 r5 
+                           2027 ;------------------------------------------------------------
+                           2028 ;c:/sdcc/exam/1.c:311: void delay(int t)
+                           2029 ;	-----------------------------------------
+                           2030 ;	 function delay
+                           2031 ;	-----------------------------------------
+   06C0                    2032 _delay:
+                           2033 ;     genReceive
+   06C0 AA 82              2034 	mov	r2,dpl
+   06C2 AB 83              2035 	mov	r3,dph
+                           2036 ;c:/sdcc/exam/1.c:314: for(i = 0; i < t; i++)
+                           2037 ;     genAssign
+   06C4 7C 00              2038 	mov	r4,#0x00
+   06C6 7D 00              2039 	mov	r5,#0x00
+   06C8                    2040 00101$:
+                           2041 ;     genCmpLt
+                           2042 ;     genCmp
+   06C8 C3                 2043 	clr	c
+   06C9 EC                 2044 	mov	a,r4
+   06CA 9A                 2045 	subb	a,r2
+   06CB ED                 2046 	mov	a,r5
+   06CC 64 80              2047 	xrl	a,#0x80
+   06CE 8B F0              2048 	mov	b,r3
+   06D0 63 F0 80           2049 	xrl	b,#0x80
+   06D3 95 F0              2050 	subb	a,b
+                           2051 ;     genIfxJump
+                           2052 ;	Peephole 108	removed ljmp by inverse jump logic
+   06D5 50 07              2053 	jnc	00105$
+   06D7                    2054 00109$:
+                           2055 ;     genPlus
+                           2056 ;     genPlusIncr
+                           2057 ;	tail increment optimized
+   06D7 0C                 2058 	inc	r4
+   06D8 BC 00 ED           2059 	cjne	r4,#0x00,00101$
+   06DB 0D                 2060 	inc	r5
+                           2061 ;	Peephole 112.b	changed ljmp to sjmp
+   06DC 80 EA              2062 	sjmp	00101$
+   06DE                    2063 00105$:
+   06DE 22                 2064 	ret
+                           2065 	.area CSEG    (CODE)
+   06DF                    2066 _addr1:
+   06DF 80                 2067 	.db #0x80
+   06E0 81                 2068 	.db #0x81
+   06E1 82                 2069 	.db #0x82
+   06E2 83                 2070 	.db #0x83
+   06E3 84                 2071 	.db #0x84
+   06E4 85                 2072 	.db #0x85
+   06E5 86                 2073 	.db #0x86
+   06E6 87                 2074 	.db #0x87
+   06E7 88                 2075 	.db #0x88
+   06E8 89                 2076 	.db #0x89
+   06E9 8A                 2077 	.db #0x8A
+   06EA 8B                 2078 	.db #0x8B
+   06EB 8C                 2079 	.db #0x8C
+   06EC 8D                 2080 	.db #0x8D
+   06ED 8E                 2081 	.db #0x8E
+   06EE 8F                 2082 	.db #0x8F
+   06EF                    2083 _addr2:
+   06EF CE                 2084 	.db #0xCE
+   06F0 C6                 2085 	.db #0xC6
+   06F1 C3                 2086 	.db #0xC3
+   06F2 CC                 2087 	.db #0xCC
+   06F3 C8                 2088 	.db #0xC8
+   06F4 C1                 2089 	.db #0xC1
+   06F5 CF                 2090 	.db #0xCF
+   06F6 C5                 2091 	.db #0xC5
+   06F7 C2                 2092 	.db #0xC2
+   06F8 CB                 2093 	.db #0xCB
+   06F9 C7                 2094 	.db #0xC7
+   06FA C4                 2095 	.db #0xC4
+   06FB CA                 2096 	.db #0xCA
+   06FC C9                 2097 	.db #0xC9
+   06FD CD                 2098 	.db #0xCD
+   06FE C0                 2099 	.db #0xC0
+   06FF                    2100 _init:
+   06FF 38                 2101 	.db #0x38
+   0700 0E                 2102 	.db #0x0E
+   0701 06                 2103 	.db #0x06
+   0702 02                 2104 	.db #0x02
+   0703 01                 2105 	.db #0x01
+   0704                    2106 _ser:
+   0704 FE                 2107 	.db #0xFE
+   0705 FD                 2108 	.db #0xFD
+   0706 FB                 2109 	.db #0xFB
+   0707 F7                 2110 	.db #0xF7
+   0708                    2111 _key:
+   0708 01 00              2112 	.byte #0x01,#0x00
+   070A 02 00              2113 	.byte #0x02,#0x00
+   070C 03 00              2114 	.byte #0x03,#0x00
+   070E 0C 00              2115 	.byte #0x0C,#0x00
+   0710 04 00              2116 	.byte #0x04,#0x00
+   0712 05 00              2117 	.byte #0x05,#0x00
+   0714 06 00              2118 	.byte #0x06,#0x00
+   0716 0D 00              2119 	.byte #0x0D,#0x00
+   0718 07 00              2120 	.byte #0x07,#0x00
+   071A 08 00              2121 	.byte #0x08,#0x00
+   071C 09 00              2122 	.byte #0x09,#0x00
+   071E 0E 00              2123 	.byte #0x0E,#0x00
+   0720 0A 00              2124 	.byte #0x0A,#0x00
+   0722 00 00              2125 	.byte #0x00,#0x00
+   0724 0B 00              2126 	.byte #0x0B,#0x00
+   0726 0F 00              2127 	.byte #0x0F,#0x00
+   0728                    2128 _keymsg:
+   0728 EE                 2129 	.db #0xEE
+   0729 ED                 2130 	.db #0xED
+   072A EB                 2131 	.db #0xEB
+   072B E7                 2132 	.db #0xE7
+   072C DE                 2133 	.db #0xDE
+   072D DD                 2134 	.db #0xDD
+   072E DB                 2135 	.db #0xDB
+   072F D7                 2136 	.db #0xD7
+   0730 BE                 2137 	.db #0xBE
+   0731 BD                 2138 	.db #0xBD
+   0732 BB                 2139 	.db #0xBB
+   0733 B7                 2140 	.db #0xB7
+   0734 7E                 2141 	.db #0x7E
+   0735 7D                 2142 	.db #0x7D
+   0736 7B                 2143 	.db #0x7B
+   0737 77                 2144 	.db #0x77
+   0738                    2145 _msg:
+   0738 30 31 32 33 34 35  2146 	.ascii "0123456789abcdef"
+        36 37 38 39 61 62
+        63 64 65 66
+   0748 00                 2147 	.db 0x00
+   0749                    2148 _startmsg1:
+   0749 68 61 6D 73 74 65  2149 	.ascii "hamster"
+        72
+   0750 00                 2150 	.db 0x00
+   0751                    2151 _startmsg2:
+   0751 70 72 65 73 73 20  2152 	.ascii "press 0 to start"
+        30 20 74 6F 20 73
+        74 61 72 74
+   0761 00                 2153 	.db 0x00
+                           2154 	.area XINIT   (CODE)
